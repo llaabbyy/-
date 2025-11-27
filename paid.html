@@ -88,7 +88,7 @@ footer strong{color:#ff00ff;}
         <span class="logo-text">أكاديمية جعفر للبرمجة</span>
     </div>
     <nav>
-        <a href="index.html">الرئيسية</a>
+         <a href="index.html">الرئيسية</a>
         <a href="free.html">المحتوى المجاني</a>
         <a href="paid.html">المحتوى المدفوع</a>
     </nav>
@@ -210,20 +210,21 @@ footer strong{color:#ff00ff;}
         <!-- كل اللغات كاملة -->
         <div class="card"><h3>HTML</h3><p>تعلم أساسيات HTML لإنشاء صفحات ويب.</p>
             <br>
-        <a class="course-btn" href="html_course.HTML" onclick="checkPassword()">دخول كورس HTML</a>
+      <a class="course-btn" href="html_course.html" onclick="return checkPassword()">دخول كورس HTML</a>
 
 <script>
 function checkPassword(){
-    // ضع هنا كلمة السر الصحيحة
-    const correctPassword = "1234*4"; 
-
+    const correctPassword = "1234*4"; // الكود الصح
     let userPass = prompt("الرجاء إدخال كلمة السر لدخول الكورس:");
-    if(userPass === null) return; // إذا ضغط الغاء
+
+    if(userPass === null) return false; // المستخدم ضغط إلغاء، لا يتم الانتقال
     if(userPass === correctPassword){
-        // إذا كانت صحيحة ينقلك للصفحة
-        window.location.href = "html_course.html";
+        // الكود صح، ينقله للصفحة
+        return true; // يسمح للمتصفح بالانتقال للرابط
     } else {
+        // الكود غلط، يظهر رسالة وماينفذش الرابط
         alert("كلمة السر غير صحيحة ❌\nيرجى التواصل على الرقم 01014843902 لمعرفة الرقم الخاص بك");
+        return false; // يمنع الانتقال للرابط
     }
 }
 </script>
