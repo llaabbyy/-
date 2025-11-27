@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>كورس HTML - أكاديمية جعفر</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#000;
+  --card: rgba(255,255,255,0.03);
+  --accent:#00bfff;
+  --accent-2:#8a00ff;
+  --highlight:#ffd54a;
+  --text:#e8f8ff;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;font-family:"Cairo",sans-serif}
+html,body{height:100%}
+body{
+  background:var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  padding-bottom:80px;
+}
+
+/* header */
+.header{
+  position:fixed; top:0; left:0; right:0;
+  height:72px; display:flex; align-items:center; justify-content:space-between;
+  padding:0 28px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.35));
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid rgba(255,255,255,0.03);
+  z-index:1000;
+}
+nav{display:flex; gap:25px;}
+nav a{color:white; text-decoration:none; font-size:16px; font-weight:600; position:relative; transition:0.3s;}
+nav a::after{content:""; position:absolute; bottom:-5px; left:0; width:0%; height:2px; background:#00f7ff; box-shadow:0 0 10px #00f7ff; transition:0.3s;}
+nav a:hover{color:#00f7ff; text-shadow:0 0 8px #00f7ff;}
+nav a:hover::after{width:100%;}
+.logo{font-weight:800;color:var(--accent-2);text-shadow:0 0 12px rgba(138,0,255,0.18);font-size:18px}
+.header-nav{display:flex;gap:14px;align-items:center}
+.header-nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:700;opacity:0.95}
+.header-nav a:hover{background:rgba(255,255,255,0.02);color:var(--accent);}
+
+/* canvas background */
+#codeRain{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:0.18}
+
+/* main */
+.main{max-width:1100px;margin:110px auto 60px;padding:22px}
+.title{text-align:center;margin-bottom:10px;}
+.title h1{font-size:32px;color:var(--highlight);text-shadow:0 0 14px rgba(255,213,74,0.06)}
+.lead{max-width:900px;margin:8px auto;color:#bfefff;line-height:1.7;text-align:center}
+
+/* section card */
+.section{margin-top:26px;padding:18px;border-radius:12px;background:linear-gradient(180deg,var(--card),rgba(255,255,255,0.01));box-shadow:0 10px 40px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.02)}
+.section h2{color:var(--accent);font-size:22px;margin-bottom:12px}
+.section .meta{color:#aee9ff;margin-bottom:10px}
+
+/* lesson layout */
+.lesson{display:flex;gap:18px;flex-direction:column;margin-top:12px}
+@media(min-width:900px){
+  .lesson{flex-direction:row}
+}
+.code-box{
+  flex:1;
+  min-width:320px;
+  background:#071021;
+  padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+  overflow:auto;font-family:monospace;font-size:14px;color:#cfefff;
+}
+.text-box{
+  flex:1;
+  min-width:260px;padding:10px;color:#dff7ff;
+}
+.code-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.copy-btn{
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  color:#000;padding:8px 12px;border-radius:8px;font-weight:800;border:none;cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,187,255,0.08);
+}
+.copy-btn:active{transform:scale(0.98)}
+
+/* small project */
+.project{margin-top:12px;padding:12px;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02)}
+.study-tip{margin-top:10px;padding:10px;border-radius:8px;background:linear-gradient(180deg, rgba(0,191,255,0.03), rgba(138,0,255,0.02));color:#dff7ff}
+
+/* footer */
+.footer{margin-top:18px;text-align:center;color:#9fdcff;font-size:13px}
+
+/* responsive tweaks */
+@media(max-width:420px){
+  .header{padding:0 12px}
+  .title h1{font-size:24px}
+  .copy-btn{padding:8px 10px;font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">أكاديمية جعفر للبرمجة</div>
+  <nav class="header-nav">
+          <a href="index.html">الرئيسية</a>
+          <a href="free.html">المحتوى المجاني</a>
+          <a href="paid.html">المحتوى المدفوع</a>
+  </nav>
+</header>
+
+<canvas id="codeRain"></canvas>
+
+<main class="main">
+  <div class="title">
+    <h1>كورس HTML — المجاني</h1>
+    <p class="lead">محتوى عملي ومدروس: مقدمة، الهيكل الأساسي، العناوين، الفقرات، الروابط، الصور، القوائم، النماذج، ومشروع صغير.</p>
+  </div>
+
+  <!-- مقدمة -->
+  <section class="section" id="intro">
+    <h2>مقدمة عن HTML</h2>
+    <div class="meta">HTML لغة ترميزية لإنشاء صفحات الويب، سهلة التعلم، وتعمل في جميع المتصفحات.</div>
+
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head">
+          <strong>مثال: أول صفحة HTML</strong>
+          <button class="copy-btn" data-target="code-intro">نسخ</button>
+        </div>
+        <pre id="code-intro" dir="ltr">&lt;!DOCTYPE html&gt;
+&lt;html lang="ar"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;صفحة تجريبية&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  مرحباً بك في HTML!
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+      </div>
+
+      <div class="text-box">
+        <p>HTML تتكون من عناصر تسمى Tags. مثالنا يوضح: <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, <code>&lt;body&gt;</code>. جرب تعديل النص لرؤية النتيجة في المتصفح.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- الهيكل -->
+  <section class="section" id="structure">
+    <h2>الهيكل الأساسي للصفحة</h2>
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: هيكل HTML كامل</strong><button class="copy-btn" data-target="code-structure">نسخ</button></div>
+        <pre id="code-structure" dir="ltr">&lt;!DOCTYPE html&gt;
+&lt;html lang="ar"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;موقعي&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;عنوان رئيسي&lt;/h1&gt;
+  &lt;p&gt;هذه فقرة نصية.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+      </div>
+
+      <div class="text-box">
+        <p>يشمل الهيكل: العنوان الرئيسي، الفقرات، روابط، صور… عناصر يمكن ترتيبها بسهولة. استخدم هذا كأساس لأي صفحة ويب.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- العناوين والفقرات -->
+  <section class="section" id="headings">
+    <h2>العناوين والفقرات</h2>
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: عناوين وفقرة</strong><button class="copy-btn" data-target="code-headings">نسخ</button></div>
+        <pre id="code-headings" dir="ltr">&lt;h1&gt;عنوان كبير&lt;/h1&gt;
+&lt;h2&gt;عنوان فرعي&lt;/h2&gt;
+&lt;p&gt;فقرة نصية هنا.&lt;/p&gt;</pre>
+      </div>
+
+      <div class="text-box">
+        <p>العناوين من <code>&lt;h1&gt;</code> إلى <code>&lt;h6&gt;</code>. الفقرة <code>&lt;p&gt;</code> تستخدم للنصوص العادية.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- الروابط -->
+  <section class="section" id="links">
+    <h2>الروابط</h2>
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: رابط</strong><button class="copy-btn" data-target="code-links">نسخ</button></div>
+        <pre id="code-links" dir="ltr">&lt;a href="https://example.com"&gt;اذهب للموقع&lt;/a&gt;</pre>
+      </div>
+
+      <div class="text-box">
+        <p>العنصر <code>&lt;a&gt;</code> لإنشاء روابط. خاصية <code>href</code> تحدد وجهة الرابط.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- الصور -->
+  <section class="section" id="images">
+    <h2>الصور</h2>
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: إدراج صورة</strong><button class="copy-btn" data-target="code-images">نسخ</button></div>
+        <pre id="code-images" dir="ltr">&lt;img src="logo.png" alt="شعار الموقع"&gt;</pre>
+      </div>
+
+      <div class="text-box">
+        <p>العنصر <code>&lt;img&gt;</code> لإدراج الصور، مع خصائص <code>src</code> و <code>alt</code>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- القوائم -->
+  <section class="section" id="lists">
+    <h2>القوائم</h2>
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: قائمة مرتبة وغير مرتبة</strong><button class="copy-btn" data-target="code-lists">نسخ</button></div>
+        <pre id="code-lists" dir="ltr">&lt;ul&gt;
+  &lt;li&gt;عنصر 1&lt;/li&gt;
+  &lt;li&gt;عنصر 2&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;أول&lt;/li&gt;
+  &lt;li&gt;ثاني&lt;/li&gt;
+&lt;/ol&gt;</pre>
+      </div>
+
+      <div class="text-box">
+        <p>القوائم <code>&lt;ul&gt;</code> غير مرتبة، <code>&lt;ol&gt;</code> مرتبة. استخدمها لتنظيم المعلومات.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- النماذج -->
+  <section class="section" id="forms">
+    <h2>النماذج الأساسية</h2>
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: نموذج تسجيل</strong><button class="copy-btn" data-target="code-forms">نسخ</button></div>
+        <pre id="code-forms" dir="ltr">&lt;form action="/submit"&gt;
+  &lt;label&gt;الاسم:&lt;/label&gt;
+  &lt;input type="text" name="name"&gt;
+  &lt;input type="submit" value="إرسال"&gt;
+&lt;/form&gt;</pre>
+      </div>
+
+      <div class="text-box">
+        <p>النماذج تستخدم لجمع البيانات من المستخدم. خصائص <code>action</code> تحدد مكان إرسال البيانات.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- مشروع صغير -->
+  <section class="section" id="project">
+    <h2>مشروع صغير: صفحة شخصية</h2>
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: صفحة شخصية HTML</strong><button class="copy-btn" data-target="code-project">نسخ</button></div>
+        <pre id="code-project" dir="ltr">&lt;!DOCTYPE html&gt;
+&lt;html lang="ar"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;صفحتي الشخصية&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;أهلاً، أنا أحمد&lt;/h1&gt;
+  &lt;p&gt;هذه صفحتي الشخصية.&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;هواية 1&lt;/li&gt;
+    &lt;li&gt;هواية 2&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+      </div>
+
+      <div class="text-box">
+        <p>المشروع يجمع كل ما تعلمته: هيكل الصفحة، عناوين، فقرات، قوائم. جرّب تغييرات لتخصيص صفحتك.</p>
+      </div>
+    </div>
+  </section>
+
+   <div style="text-align:center;margin-top:18px">
+    <h3>انتهى الكورس المجاني للغة HTML</h3>
+    <a class="copy-btn" style="display:inline-block;margin-top:10px;padding:12px 18px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#000;font-weight:800;border-radius:10px;text-decoration:none" href="paid.html">اشترك الآن في النسخة المدفوعة 💳</a>
+  </div>
+
+
+  <div class="footer">جميع الحقوق محفوظة © أكاديمية جعفر للبرمجة</div>
+</main>
+
+<script>
+/* MATRIX RAIN */
+const canvas = document.getElementById('codeRain');
+const ctx = canvas.getContext('2d');
+function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+const chars="01<>[]{}#@$&*/+-=";
+const fontSize=16;
+let columns=Math.floor(canvas.width/fontSize);
+let drops=new Array(columns).fill(0).map(()=>Math.floor(Math.random()*canvas.height/fontSize));
+
+function draw(){
+  ctx.fillStyle="rgba(0,0,0,0.06)";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="#ffd54a";
+  ctx.font=fontSize+"px monospace";
+  columns=Math.floor(canvas.width/fontSize);
+  if(drops.length<columns){while(drops.length<columns)drops.push(0);}
+  else if(drops.length>columns)drops=drops.slice(0,columns);
+  for(let i=0;i<columns;i++){
+    const char=chars[Math.floor(Math.random()*chars.length)];
+    ctx.fillText(char,i*fontSize,drops[i]*fontSize);
+    if(drops[i]*fontSize>canvas.height && Math.random()>0.975) drops[i]=0;
+    drops[i]++;
+  }
+}
+setInterval(draw,40);
+
+/* Copy buttons */
+document.querySelectorAll('.copy-btn').forEach(btn=>{
+  btn.addEventListener('click', async ()=>{
+    const id=btn.getAttribute('data-target');
+    const el=document.getElementById(id);
+    if(!el){const pre=btn.closest('.code-box').querySelector('pre');if(pre){try{await navigator.clipboard.writeText(pre.textContent);btn.textContent='تم النسخ';setTimeout(()=>btn.textContent='نسخ',1500);}catch(e){alert('فشل النسخ');}}return;}
+    try{await navigator.clipboard.writeText(el.textContent);const old=btn.textContent;btn.textContent='تم النسخ';setTimeout(()=>btn.textContent=old,1300);}catch(e){const range=document.createRange();range.selectNodeContents(el);const sel=window.getSelection();sel.removeAllRanges();sel.addRange(range);try{document.execCommand('copy');btn.textContent='تم النسخ';setTimeout(()=>btn.textContent='نسخ',1300);}catch(err){alert('نسخ فشل — انسخ يدوياً')}sel.removeAllRanges();}
+  });
+});
+</script>
+
+</body>
+</html>

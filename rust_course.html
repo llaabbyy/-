@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>كورس Rust - أكاديمية جعفر</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#000;
+  --card: rgba(255,255,255,0.03);
+  --accent:#00f7ff;
+  --accent-2:#ffcc00;
+  --highlight:#ffd54a;
+  --text:#e8f8ff;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;font-family:"Cairo",sans-serif}
+html,body{height:100%}
+body{
+  background:var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  padding-bottom:80px;
+}
+
+.header{
+  position:fixed; top:0; left:0; right:0;
+  height:72px; display:flex; align-items:center; justify-content:space-between;
+  padding:0 28px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.35));
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid rgba(255,255,255,0.03);
+  z-index:1000;
+}
+nav{display:flex; gap:25px;}
+nav a{color:white; text-decoration:none; font-size:16px; font-weight:600; position:relative; transition:0.3s;}
+nav a::after{content:""; position:absolute; bottom:-5px; left:0; width:0%; height:2px; background:#00f7ff; box-shadow:0 0 10px#00f7ff; transition:0.3s;}
+nav a:hover{color:#00f7ff; text-shadow:0 0 8px #00f7ff;}
+nav a:hover::after{width:100%;}
+.logo{font-weight:800;color:var(--accent-2);text-shadow:0 0 12px rgba(255,204,0,0.18);font-size:18px}
+.header-nav{display:flex;gap:14px;align-items:center}
+.header-nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:700;opacity:0.95}
+.header-nav a:hover{background:rgba(255,255,255,0.02);color:var(--accent);}
+
+.main{max-width:1100px;margin:110px auto 60px;padding:22px}
+.title{text-align:center;margin-bottom:10px;}
+.title h1{font-size:32px;color:var(--highlight);text-shadow:0 0 14px rgba(255,213,74,0.06)}
+.lead{max-width:900px;margin:8px auto;color:#bfefff;line-height:1.7;text-align:center}
+
+.section{margin-top:26px;padding:18px;border-radius:12px;background:linear-gradient(180deg,var(--card),rgba(255,255,255,0.01));box-shadow:0 10px 40px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.02)}
+.section h2{color:var(--accent);font-size:22px;margin-bottom:12px}
+.section .meta{color:#aee9ff;margin-bottom:10px}
+
+.lesson{display:flex;gap:18px;flex-direction:column;margin-top:12px}
+@media(min-width:900px){.lesson{flex-direction:row}}
+.code-box{
+  flex:1;
+  min-width:320px;
+  background:#071021;
+  padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+  overflow:auto;font-family:monospace;font-size:14px;color:#cfefff;
+}
+.text-box{
+  flex:1;
+  min-width:260px;padding:10px;color:#dff7ff;
+}
+.code-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.copy-btn{
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  color:#000;padding:8px 12px;border-radius:8px;font-weight:800;border:none;cursor:pointer;
+  box-shadow:0 6px 18px rgba(255,102,0,0.08);
+}
+.copy-btn:active{transform:scale(0.98)}
+
+.footer{margin-top:18px;text-align:center;color:#9fdcff;font-size:13px}
+
+@media(max-width:420px){
+  .header{padding:0 12px}
+  .title h1{font-size:24px}
+  .copy-btn{padding:8px 10px;font-size:13px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="logo">أكاديمية جعفر للبرمجة</div>
+  <nav class="header-nav">
+    <a href="index.html">الرئيسية</a>
+    <a href="free.html">المحتوى المجاني</a>
+    <a href="paid.html">المحتوى المدفوع</a>
+  </nav>
+</header>
+
+<main class="main">
+  <div class="title">
+    <h1>كورس Rust — المجاني</h1>
+    <p class="lead">تعلم أساسيات Rust: الطباعة، المتغيرات، الشروط، الحلقات، الدوال، المصفوفات، Structs، و Ownership.</p>
+  </div>
+
+<!-- INTRO -->
+<section class="section" id="intro">
+  <h2>ما هي Rust؟</h2>
+  <div class="meta">
+    Rust لغة برمجة سريعة وآمنة، تُركز على الأداء والتحكم بالذاكرة بدون Garbage Collector. ممتازة لتطوير الألعاب، السيرفرات، والأنظمة.
+  </div>
+
+  <div class="lesson">
+    <div class="code-box">
+      <div class="code-head"><strong>مثال أول: طباعة</strong><button class="copy-btn" data-target="rust-intro">نسخ</button></div>
+      <pre id="rust-intro" dir="ltr">fn main() {
+    println!("Hello, Rust!");
+}</pre>
+    </div>
+
+    <div class="text-box">
+      <p>نبدأ بـ <code>fn main()</code> كنقطة البداية. <code>println!</code> هي ماكرو لطباعة النص على الشاشة.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VARIABLES -->
+<section class="section">
+ <h2>المتغيرات</h2>
+ <div class="meta">في Rust المتغيرات افتراضياً immutable، ويمكن جعلها mutable باستخدام <code>mut</code>.</div>
+
+ <div class="lesson">
+   <div class="code-box">
+     <div class="code-head"><strong>تعريف المتغيرات</strong><button class="copy-btn" data-target="rust-vars">نسخ</button></div>
+     <pre id="rust-vars" dir="ltr">let name = "Ahmed";       // غير قابل للتغيير
+let mut age = 21;           // قابل للتغيير
+const PI: f64 = 3.14159;    // ثابت</pre>
+   </div>
+
+   <div class="text-box">
+     <p>استخدام <code>let</code> لإنشاء متغير. <code>const</code> للثوابت. النوع يمكن تحديده صراحة أو يُستنتج.</p>
+   </div>
+ </div>
+</section>
+
+<!-- CONDITIONS -->
+<section class="section">
+  <h2>الشروط IF</h2>
+
+  <div class="lesson">
+    <div class="code-box">
+      <div class="code-head"><strong>مثال على IF</strong><button class="copy-btn" data-target="rust-if">نسخ</button></div>
+      <pre id="rust-if" dir="ltr">let num = 10;
+
+if num > 5 {
+    println!("أكبر من 5");
+} else if num == 5 {
+    println!("يساوي 5");
+} else {
+    println!("أصغر من 5");
+}</pre>
+    </div>
+
+    <div class="text-box">
+      <p>Rust تستخدم الأقواس <code>{}</code> دائماً، ولا تحتاج إلى أقواس حول الشرط.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LOOPS -->
+<section class="section">
+  <h2>الحلقات</h2>
+
+  <div class="lesson">
+    <div class="code-box">
+      <div class="code-head"><strong>for loop</strong><button class="copy-btn" data-target="rust-for">نسخ</button></div>
+      <pre id="rust-for" dir="ltr">for i in 1..=5 {
+    println!("Hello {}", i);
+}</pre>
+    </div>
+    <div class="text-box">
+      <p>الحلقة <code>for</code> في Rust تستخدم نطاقات مثل <code>1..=5</code> شامل 5.</p>
+    </div>
+  </div>
+
+  <div class="lesson">
+    <div class="code-box">
+      <div class="code-head"><strong>while loop</strong><button class="copy-btn" data-target="rust-while">نسخ</button></div>
+      <pre id="rust-while" dir="ltr">let mut count = 0;
+while count < 5 {
+    println!("count = {}", count);
+    count += 1;
+}</pre>
+    </div>
+    <div class="text-box">
+      <p>حلقة <code>while</code> تتكرر طالما الشرط صحيح.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FUNCTIONS -->
+<section class="section">
+  <h2>الدوال</h2>
+
+  <div class="lesson">
+    <div class="code-box">
+      <div class="code-head"><strong>دالة بسيطة</strong><button class="copy-btn" data-target="rust-func">نسخ</button></div>
+      <pre id="rust-func" dir="ltr">fn greet(name: &str) {
+    println!("مرحبا يا {}", name);
+}
+
+greet("Ahmed");</pre>
+    </div>
+
+    <div class="text-box">
+      <p>الدوال تبدأ بـ <code>fn</code>. النوع مهم في المعلمات (<code>&str</code> هنا تعني نص مرجعي).</p>
+    </div>
+  </div>
+</section>
+
+<!-- VECTORS -->
+<section class="section">
+  <h2>Vectors (المصفوفات الديناميكية)</h2>
+
+  <div class="lesson">
+    <div class="code-box">
+      <div class="code-head"><strong>Vector مثال</strong><button class="copy-btn" data-target="rust-vec">نسخ</button></div>
+      <pre id="rust-vec" dir="ltr">let mut numbers = vec![10, 20, 30];
+numbers.push(40);
+
+for num in &numbers {
+    println!("{}", num);
+}</pre>
+    </div>
+
+    <div class="text-box">
+      <p>Vectors هي مصفوفات ديناميكية يمكن تعديل حجمها باستخدام <code>push</code>. استخدم & للوصول بدون نقل الملكية.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STRUCTS -->
+<section class="section">
+  <h2>Structs (الكائنات البسيطة)</h2>
+
+  <div class="lesson">
+    <div class="code-box">
+      <div class="code-head"><strong>Struct مثال</strong><button class="copy-btn" data-target="rust-struct">نسخ</button></div>
+      <pre id="rust-struct" dir="ltr">struct Person {
+    name: String,
+    age: u32,
+}
+
+let p1 = Person { name: String::from("Ahmed"), age: 20 };
+println!("{} - {}", p1.name, p1.age);</pre>
+    </div>
+
+    <div class="text-box">
+      <p>Structs تُستخدم لإنشاء أنواع بيانات معقدة، هنا <code>String::from</code> لتحويل نص ثابت إلى نص قابل للملكية.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OWNERSHIP -->
+<section class="section">
+  <h2>Ownership و Borrowing</h2>
+
+  <div class="lesson">
+    <div class="code-box">
+      <div class="code-head"><strong>مثال Ownership</strong><button class="copy-btn" data-target="rust-ownership">نسخ</button></div>
+      <pre id="rust-ownership" dir="ltr">let s1 = String::from("Hello");
+let s2 = s1; // ownership تنتقل إلى s2
+// println!("{}", s1); // هذا سيسبب خطأ
+
+let s3 = &s2; // borrowing يسمح بالوصول بدون نقل الملكية
+println!("{}", s3);</pre>
+    </div>
+
+    <div class="text-box">
+      <p>Rust تتحكم بالذاكرة عن طريق ownership و borrowing لتجنب مشاكل الذاكرة مثل dangling pointers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- END -->
+<section class="section" style="background:rgba(255,102,0,0.07)">
+  <h2>🎯 نهاية المستوى المجاني</h2>
+  <p class="meta">المحتوى المتقدم في النسخة المدفوعة يشمل Traits – Generics – Error Handling – Concurrency – مشاريع عملية.</p>
+</section>
+
+<div style="text-align:center;margin-top:18px">
+  <a class="copy-btn" style="display:inline-block;margin-top:10px;padding:12px 18px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#000;font-weight:800;border-radius:10px;text-decoration:none" href="paid.html">اشترك الآن في النسخة المدفوعة 💳</a>
+</div>
+
+<div class="footer">جميع الحقوق محفوظة © أكاديمية جعفر للبرمجة</div>
+
+<script>
+document.querySelectorAll('.copy-btn').forEach(btn=>{
+  btn.addEventListener('click', async ()=>{
+    const id=btn.getAttribute('data-target');
+    const el=document.getElementById(id);
+    if(!el){const pre=btn.closest('.code-box').querySelector('pre');if(pre){try{await navigator.clipboard.writeText(pre.textContent);btn.textContent='تم النسخ';setTimeout(()=>btn.textContent='نسخ',1500);}catch(e){alert('فشل النسخ');}}return;}
+    try{await navigator.clipboard.writeText(el.textContent);const old=btn.textContent;btn.textContent='تم النسخ';setTimeout(()=>btn.textContent=old,1300);}catch(e){const range=document.createRange();range.selectNodeContents(el);const sel=window.getSelection();sel.removeAllRanges();sel.addRange(range);try{document.execCommand('copy');btn.textContent='تم النسخ';setTimeout(()=>btn.textContent='نسخ',1300);}catch(err){alert('نسخ فشل — انسخ يدوياً')}sel.removeAllRanges();}
+  });
+});
+</script>
+
+</body>
+</html>

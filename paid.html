@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المحتوى المدفوع - أكاديمية جعفر للبرمجة</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Cairo",sans-serif;}
+body{background:#0a0014;color:white;overflow-x:hidden;}
+
+/* MATRIX RAIN */
+#codeRain{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:0.2;}
+
+/* HEADER */
+.main-header{
+    position:fixed; top:0; left:0; width:100%; height:80px; padding:0 40px;
+    display:flex; justify-content:space-between; align-items:center;
+    backdrop-filter: blur(12px); background: rgba(61,0,102,0.85); /* موف */
+    border-bottom:1px solid rgba(147,0,255,0.3);
+    box-shadow:0 0 15px rgba(147,0,255,0.4);
+    z-index:1000;
+}
+.logo-box{display:flex; align-items:center; gap:12px;}
+.logo-img{height:50px; width:auto; filter: drop-shadow(0 0 1px #fffb00); transition:0.3s;}
+.logo-img:hover{filter: drop-shadow(0 0 20px #ff00ff); transform:scale(1.05);}
+.logo-text{font-size:22px; font-weight:700; color:white; text-shadow:0 0 12px #ff00ff;}
+
+nav{display:flex; gap:25px;}
+nav a{color:white; text-decoration:none; font-size:16px; font-weight:600; position:relative; transition:0.3s;}
+nav a::after{content:""; position:absolute; bottom:-5px; left:0; width:0%; height:2px; background:#ff00ff; box-shadow:0 0 10px #ff00ff; transition:0.3s;}
+nav a:hover{color:#ff00ff; text-shadow:0 0 8px #ff00ff;}
+nav a:hover::after{width:100%;}
+
+.menu-toggle{display:none; flex-direction:column; gap:5px; cursor:pointer;}
+.menu-toggle span{width:30px; height:4px; background:#ff00ff; border-radius:5px; box-shadow:0 0 8px #ff00ff; transition:0.3s;}
+@media(max-width:750px){
+    nav{position:fixed; top:80px; right:-100%; width:60%; height:100vh; background: rgba(61,0,102,0.95); backdrop-filter:blur(8px); flex-direction:column; padding:40px 20px; gap:25px; transition:0.4s;}
+    nav.active{right:0;}
+    .menu-toggle{display:flex;}
+}
+
+/* HERO */
+.hero{margin-top:130px;text-align:center;padding:80px 20px;position:relative;}
+.hero h1{font-size:50px;color:#ff00ff;text-shadow:0 0 15px #ff00ff;}
+.hero p{margin-top:20px;font-size:20px;opacity:0.85;}
+.hero .btn{margin-top:30px;display:inline-block;padding:12px 35px;background:#ff00ff;color:#000;font-size:18px;font-weight:700;border-radius:8px;text-decoration:none;transition:0.3s;box-shadow:0 0 15px #ff00ff;}
+.hero .btn:hover{background:#fff; box-shadow:0 0 25px white; transform:scale(1.05);}
+.hero h2 {font-size: 40px;color:#fffb00;text-shadow:10px 10px 30px red;}
+/* قبعة */
+.hat{width:120px;margin-bottom:20px; filter: drop-shadow(0 0 5px #ff00ff);}
+
+/* الكتابة المتحركة */
+.typewriter{
+    font-size:26px;
+    color:#ff00ff;
+    text-shadow:0 0 10px #d400ff;
+    display:block;
+    margin:auto;
+    width:fit-content;
+}
+
+/* SECTIONS */
+.section{text-align:center;padding:60px 20px;position:relative;z-index:10;}
+.section h2{font-size:36px;color:#ff00ff;text-shadow:0 0 12px #ff00ff;}
+.cards{margin-top:40px; display:flex; justify-content:center; flex-wrap:wrap; gap:25px;}
+.card{width:250px; background:rgba(255,255,255,0.05); padding:25px; text-align:center; border-radius:18px; box-shadow:0 0 15px rgba(147,0,255,0.15); transition:0.3s; backdrop-filter: blur(8px);}
+.card:hover{transform:scale(1.05); box-shadow:0 0 25px rgba(147,0,255,0.3);}
+.card h3{margin-bottom:12px; font-size:22px; color:#ffb3ff;}
+.card p{font-size:16px; opacity:0.85;}
+
+/* مميزات النسخة المدفوعة */
+.features{margin-top:50px;text-align:center;}
+.features h3{font-size:28px;color:#ff00ff;margin-bottom:20px;}
+.features ul{list-style:none; padding:0;}
+.features ul li{font-size:18px; margin:10px 0; opacity:0.9;}
+.course-btn{
+    display:inline-block;padding:2px 35px;background:#ff00ff;color:#000;font-size:18px;font-weight:700;border-radius:8px;text-decoration:none;transition:0.3s;box-shadow:0 0 15px #ff00ff;
+}
+footer{padding:25px;text-align:center;background:#0a0014;color:#aaa;margin-top:40px; font-size:14px;}
+footer strong{color:#ff00ff;}
+</style>
+</head>
+<body>
+
+<header class="main-header">
+    <div class="logo-box">
+        <img src="logo.png" alt="أكاديمية جعفر" class="logo-img">
+        <span class="logo-text">أكاديمية جعفر للبرمجة</span>
+    </div>
+    <nav>
+        <a href="index.html">الرئيسية</a>
+        <a href="free.html">المحتوى المجاني</a>
+        <a href="paid.html">المحتوى المدفوع</a>
+    </nav>
+    <div class="menu-toggle">
+        <span></span><span></span><span></span>
+    </div>
+</header>
+<canvas id="codeRain"></canvas>
+<section class="hero">
+     <img src="jafer-logo.png" alt="Graduation Hat" class="hat">
+    <h1>المحتوى المدفوع</h1>
+    <h2> قيد الإنشاء </h2>
+    <p>ابدأ تعلم البرمجة بإحترافية مع دفع اشتراك بسيط</p>
+      <!-- زرار الواتساب -->
+    <a class="btn whatsapp-btn" href="https://wa.me/201014843902" target="_blank">
+        تواصل معنا على واتساب  لحجز الاشتراك
+    </a>
+    <br>
+    <a class="btn" href="index.html">العودة للرئيسية</a>
+</section>
+
+<style>
+/* زرار واتساب فوق */
+.whatsapp-btn {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 12px 30px;
+    background: #25D366;
+    color: white;
+    font-weight: 700;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 0 15px #25D366;
+    transition: 0.3s;
+}
+.whatsapp-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #25D366;
+}
+</style>
+
+<section class="hero">
+    <img src="logo.png" alt="Graduation Hat" class="hat">
+    <span class="typewriter"></span>
+</section>
+<section class="features">
+  <div class="feature-box">
+    <div class="feature-icon">💎</div>
+    <h3>الوصول الكامل</h3>
+    <p>جميع اللغات والكورسات بدون قيود، تجربة تعليمية شاملة.</p>
+  </div>
+  <div class="feature-box">
+    <div class="feature-icon">⚡</div>
+    <h3>أمثلة عملية</h3>
+    <p>تمارين عملية لكل لغة لتسريع التعلم وتحسين الفهم.</p>
+  </div>
+  <div class="feature-box">
+    <div class="feature-icon">🧠</div>
+    <h3>دروس تفاعلية</h3>
+    <p>تجربة تفاعلية ومحتوى مُحدث باستمرار بشكل احترافي.</p>
+  </div>
+  <div class="feature-box">
+    <div class="feature-icon">💲</div>
+    <h3>أسعار مناسبة</h3>
+    <p>الأسعار مناسبة لجميع الطبقات لتسهيل الاشتراك وتعليم البرمجة للجميع</p>
+  </div>
+</section>
+
+<style>
+.features{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:30px;
+    margin:50px 0;
+}
+.feature-box{
+    background: rgba(255,255,255,0.05);
+    border-radius:20px;
+    padding:30px 25px;
+    width:220px;
+    text-align:center;
+    box-shadow:0 0 20px rgba(147,0,255,0.2);
+    transition:0.4s;
+    position:relative;
+    overflow:hidden;
+}
+.feature-box:hover{
+    transform:scale(1.07);
+    box-shadow:0 0 40px rgba(255,0,255,0.5);
+}
+.feature-icon{
+    font-size:40px;
+    margin-bottom:15px;
+    animation: glow 2s infinite alternate;
+}
+@keyframes glow{
+    0%{text-shadow:0 0 5px #ff00ff,0 0 10px #b300ff;}
+    50%{text-shadow:0 0 15px #ff00ff,0 0 25px #b300ff;}
+    100%{text-shadow:0 0 20px #ff00ff,0 0 35px #b300ff;}
+}
+.feature-box h3{
+    font-size:20px;
+    color:#ffb3ff;
+    margin-bottom:10px;
+    text-shadow:0 0 8px #d400ff;
+}
+.feature-box p{
+    font-size:15px;
+    color:#e0caff;
+    line-height:1.5;
+    opacity:0.9;
+}
+</style>
+
+<section class="section">
+    <h2>الكورسات المدفوعة</h2>
+    <div class="cards">
+        <!-- كل اللغات كاملة -->
+        <div class="card"><h3>HTML</h3><p>تعلم أساسيات HTML لإنشاء صفحات ويب.</p>
+            <br>
+        <a class="course-btn" href="html_course.HTML" onclick="checkPassword()">دخول كورس HTML</a>
+
+<script>
+function checkPassword(){
+    // ضع هنا كلمة السر الصحيحة
+    const correctPassword = "1234*4"; 
+
+    let userPass = prompt("الرجاء إدخال كلمة السر لدخول الكورس:");
+    if(userPass === null) return; // إذا ضغط الغاء
+    if(userPass === correctPassword){
+        // إذا كانت صحيحة ينقلك للصفحة
+        window.location.href = "html_course.html";
+    } else {
+        alert("كلمة السر غير صحيحة ❌\nيرجى التواصل على الرقم 01014843902 لمعرفة الرقم الخاص بك");
+    }
+}
+</script>
+        </div>
+        <div class="card"><h3>CSS</h3><p>تعلم تصميم صفحات ويب مع CSS والتأثيرات.</p></div>
+        <div class="card"><h3>JavaScript</h3><p>تعلم البرمجة التفاعلية على صفحات الويب.</p></div>
+        <div class="card"><h3>Python</h3><p>تعلم البرمجة العامة والتطبيقات العملية.</p></div>
+        <div class="card"><h3>C++</h3><p>تعلم برمجة قوية لإنشاء برامج عالية الأداء.</p></div>
+        <div class="card"><h3>C#</h3><p>تعلم لغة برمجة حديثة لتطوير برامج سطح المكتب.</p></div>
+        <div class="card"><h3>Java</h3><p>لغة قوية لتطوير التطبيقات والأنظمة.</p></div>
+        <div class="card"><h3>PHP</h3><p>تطوير مواقع ديناميكية احترافية.</p></div>
+        <div class="card"><h3>SQL</h3><p>التعامل مع قواعد البيانات باحتراف.</p></div>
+        <div class="card"><h3>Ruby</h3><p>لغة برمجة سهلة وقوية لتطوير الويب والتطبيقات.</p></div>
+        <div class="card"><h3>Swift</h3><p>لغة Swift لتطوير تطبيقات iOS وmacOS.</p></div>
+        <div class="card"><h3>Kotlin</h3><p>لغة Kotlin لتطوير تطبيقات Android حديثة.</p></div>
+        <div class="card"><h3>Go</h3><p>لغة Go لبناء تطبيقات سريعة وقوية.</p></div>
+        <div class="card"><h3>Rust</h3><p>لغة Rust الحديثة الآمنة والأداء العالي.</p></div>
+        <div class="card"><h3>TypeScript</h3><p>TypeScript لتطوير تطبيقات JavaScript قوية ومنظمة.</p></div>
+        <div class="card"><h3>Scala</h3><p>Scala للبرمجة الوظيفية وتطبيقات JVM.</p></div>
+        <div class="card"><h3>Perl</h3><p>Perl للبرمجة النصية ومعالجة البيانات.</p></div>
+        <div class="card"><h3>Dart</h3><p>Dart لتطوير تطبيقات Flutter الحديثة.</p></div>
+        <div class="card"><h3>Lua</h3><p>Lua للبرمجة الخفيفة وألعاب الفيديو.</p></div>
+        <div class="card"><h3>Haskell</h3><p>Haskell للبرمجة الوظيفية والنظريات الرياضية.</p></div>
+        <div class="card"><h3>Elixir</h3><p>Elixir لتطوير تطبيقات متزامنة وموثوقة.</p></div>
+        <div class="card"><h3>Julia</h3><p>Julia للبرمجة العلمية والتحليلات العددية.</p></div>
+        <div class="card"><h3>Objective-C</h3><p>Objective-C لتطوير تطبيقات iOS القديمة وmacOS.</p></div>
+        <div class="card"><h3>F#</h3><p>F# للبرمجة الوظيفية على منصة .NET.</p></div>
+        <div class="card"><h3>R</h3><p>R للتحليل الإحصائي وعلوم البيانات.</p></div>
+        <div class="card"><h3>Shell</h3><p>Shell scripting لأتمتة المهام في أنظمة Linux وUnix.</p></div>
+        <div class="card"><h3>MATLAB</h3><p>MATLAB للرياضيات والهندسة والمحاكاة.</p></div>
+        <div class="card"><h3>COBOL</h3><p>COBOL لتطوير أنظمة الشركات القديمة والمالية.</p></div>
+        <div class="card"><h3>Assembly</h3><p>Assembly للبرمجة منخفضة المستوى والتعامل مع الهاردوير مباشرة.</p></div>
+        <div class="card"><h3>Elm</h3><p>Elm لتطوير واجهات ويب آمنة وسهلة باستخدام البرمجة الوظيفية.</p></div>
+        <div class="card"><h3>Clojure</h3><p>Clojure للبرمجة الوظيفية والتعامل مع البيانات الكبيرة.</p></div>
+        <div class="card"><h3>Scheme</h3><p>Scheme لفهم البرمجة الوظيفية ومفاهيم الخوارزميات.</p></div>
+        <div class="card"><h3>Prolog</h3><p>Prolog للبرمجة المنطقية وحل المشكلات والذكاء الاصطناعي.</p></div>
+        <div class="card"><h3>Groovy</h3><p>Groovy لتسهيل كتابة السكربتات وأتمتة العمليات على منصة Java.</p></div>
+        <div class="card"><h3>Fortran</h3><p>Fortran للحسابات العلمية والهندسية عالية الأداء.</p></div>
+        <div class="card"><h3>OCaml</h3><p>OCaml للبرمجة الوظيفية والتطبيقات الأكاديمية.</p></div>
+        <div class="card"><h3>Smalltalk</h3><p>Smalltalk لفهم البرمجة الكائنية وتطبيقات OOP.</p></div>
+        <div class="card"><h3>VBA</h3><p>VBA لأتمتة مهام Excel وOffice بسهولة وسرعة.</p></div>
+        <div class="card"><h3>LabVIEW</h3><p>LabVIEW لتطوير تطبيقات التحكم والهندسة باستخدام البرمجة الرسومية.</p></div>
+        <div class="card"><h3>Solidity</h3><p>Solidity لتطوير العقود الذكية على شبكة البلوكشين وEthereum.</p></div>
+    </div>
+</section>
+
+<footer>
+جميع الحقوق محفوظة © <strong>أكاديمية جعفر للبرمجة</strong>
+</footer>
+
+<script>
+// MATRIX MOF
+const canvas = document.getElementById('codeRain');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+const chars = "01<>[]{}#@$&*/+-=";
+const fontSize = 18;
+const columns = canvas.width / fontSize;
+const drops = [];
+for(let i=0;i<columns;i++) drops[i] = Math.floor(Math.random()*canvas.height/fontSize);
+function draw(){
+    ctx.fillStyle = "rgba(10,0,20,0.05)";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle="#ff00ff";
+    ctx.font = fontSize+"px monospace";
+    for(let i=0;i<drops.length;i++){
+        const char = chars[Math.floor(Math.random()*chars.length)];
+        ctx.fillText(char,i*fontSize,drops[i]*fontSize);
+        if(drops[i]*fontSize > canvas.height && Math.random()>0.975) drops[i]=0;
+        drops[i]++;
+    }
+}
+setInterval(draw,35);
+
+// TYPEWRITER
+const text = "تعلم البرمجة بإحتراف مع أكاديمية جعفر للبرمجة";
+let index=0,dir=1;
+function typeWriter(){
+    const el=document.querySelector(".typewriter");
+    el.textContent=text.slice(0,index);
+    index+=dir;
+    if(index===text.length) dir=-1;
+    if(index===0) dir=1;
+    setTimeout(typeWriter,90);
+}
+typeWriter();
+
+// MOBILE MENU
+const toggle = document.querySelector(".menu-toggle");
+const menu = document.querySelector("nav");
+toggle.addEventListener("click",()=>{menu.classList.toggle("active");});
+window.addEventListener("resize", ()=>{canvas.width = window.innerWidth; canvas.height = window.innerHeight;});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>كورس CSS - أكاديمية جعفر</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#000;
+  --card: rgba(255,255,255,0.03);
+  --accent:#00bfff;
+  --accent-2:#8a00ff;
+  --highlight:#ffd54a;
+  --text:#e8f8ff;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;font-family:"Cairo",sans-serif}
+html,body{height:100%}
+body{
+  background:var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  padding-bottom:80px;
+}
+
+/* header */
+.header{
+  position:fixed; top:0; left:0; right:0;
+  height:72px; display:flex; align-items:center; justify-content:space-between;
+  padding:0 28px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.35));
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid rgba(255,255,255,0.03);
+  z-index:1000;
+}
+nav{display:flex; gap:25px;}
+nav a{color:white; text-decoration:none; font-size:16px; font-weight:600; position:relative; transition:0.3s;}
+nav a::after{content:""; position:absolute; bottom:-5px; left:0; width:0%; height:2px; background:#00f7ff; box-shadow:0 0 10px #00f7ff; transition:0.3s;}
+nav a:hover{color:#00f7ff; text-shadow:0 0 8px #00f7ff;}
+nav a:hover::after{width:100%;}
+.logo{font-weight:800;color:var(--accent-2);text-shadow:0 0 12px rgba(138,0,255,0.18);font-size:18px}
+.header-nav{display:flex;gap:14px;align-items:center}
+.header-nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:700;opacity:0.95}
+.header-nav a:hover{background:rgba(255,255,255,0.02);color:var(--accent);}
+
+/* canvas background */
+#codeRain{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:0.18}
+
+/* main */
+.main{max-width:1100px;margin:110px auto 60px;padding:22px}
+.title{text-align:center;margin-bottom:10px;}
+.title h1{font-size:32px;color:var(--highlight);text-shadow:0 0 14px rgba(255,213,74,0.06)}
+.lead{max-width:900px;margin:8px auto;color:#bfefff;line-height:1.7;text-align:center}
+
+/* section card */
+.section{margin-top:26px;padding:18px;border-radius:12px;background:linear-gradient(180deg,var(--card),rgba(255,255,255,0.01));box-shadow:0 10px 40px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.02)}
+.section h2{color:var(--accent);font-size:22px;margin-bottom:12px}
+.section .meta{color:#aee9ff;margin-bottom:10px}
+
+/* lesson layout */
+.lesson{display:flex;gap:18px;flex-direction:column;margin-top:12px}
+@media(min-width:900px){
+  .lesson{flex-direction:row}
+}
+.code-box{
+  flex:1;
+  min-width:320px;
+  background:#071021;
+  padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+  overflow:auto;font-family:monospace;font-size:14px;color:#cfefff;
+}
+.text-box{
+  flex:1;
+  min-width:260px;padding:10px;color:#dff7ff;
+}
+.code-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.copy-btn{
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  color:#000;padding:8px 12px;border-radius:8px;font-weight:800;border:none;cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,187,255,0.08);
+}
+.copy-btn:active{transform:scale(0.98)}
+
+/* small project */
+.project{margin-top:12px;padding:12px;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02)}
+.study-tip{margin-top:10px;padding:10px;border-radius:8px;background:linear-gradient(180deg, rgba(0,191,255,0.03), rgba(138,0,255,0.02));color:#dff7ff}
+
+/* footer */
+.footer{margin-top:18px;text-align:center;color:#9fdcff;font-size:13px}
+
+/* responsive tweaks */
+@media(max-width:420px){
+  .header{padding:0 12px}
+  .title h1{font-size:24px}
+  .copy-btn{padding:8px 10px;font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">أكاديمية جعفر للبرمجة</div>
+  <nav class="header-nav">
+          <a href="index.html">الرئيسية</a>
+          <a href="free.html">المحتوى المجاني</a>
+          <a href="paid.html">المحتوى المدفوع</a>
+  </nav>
+</header>
+
+<canvas id="codeRain"></canvas>
+
+<main class="main">
+  <div class="title">
+    <h1>كورس CSS — المجاني</h1>
+    <p class="lead">محتوى عملي ومدروس: مقدمة، الألوان، الخطوط، الصناديق، Flexbox، Grid، التدرجات، والعديد من الأمثلة مع مشروع صغير.</p>
+  </div>
+
+  <!-- مقدمة -->
+  <section class="section" id="intro">
+    <h2>مقدمة عن CSS</h2>
+    <div class="meta">CSS لغة تصميم لتنسيق صفحات الويب، تتحكم بالألوان، الخطوط، التخطيط، والمرئيات العامة.</div>
+
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head">
+          <strong>مثال: CSS داخلي</strong>
+          <button class="copy-btn" data-target="code-intro">نسخ</button>
+        </div>
+        <pre id="code-intro" dir="ltr">&lt;!DOCTYPE html&gt;
+&lt;html lang="ar"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;style&gt;
+    body { background:#000; color:#fff; font-family:Arial, sans-serif; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  مرحباً بك في CSS!
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+      </div>
+
+      <div class="text-box">
+        <p>يمكن وضع CSS داخلي في &lt;style&gt; داخل رأس الصفحة، أو خارجي في ملف <code>.css</code>. CSS يتحكم بالمظهر البصري لعناصر HTML.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- الألوان -->
+  <section class="section" id="colors">
+    <h2>الألوان والخلفيات</h2>
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: تغيير اللون والخلفية</strong><button class="copy-btn" data-target="code-colors">نسخ</button></div>
+        <pre id="code-colors" dir="ltr">h1 { color: #ffd54a; }
+body { background-color: #000; }</pre>
+      </div>
+      <div class="text-box">
+        <p>يمكن استخدام اللون بالاسم أو بالكود الست عشري <code>#ffd54a</code>. الخلفيات يمكن أن تكون ألوان أو صور.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- الخطوط -->
+  <section class="section" id="fonts">
+    <h2>الخطوط والنصوص</h2>
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: خطوط ونصوص</strong><button class="copy-btn" data-target="code-fonts">نسخ</button></div>
+        <pre id="code-fonts" dir="ltr">p { font-family: "Cairo", sans-serif; font-size: 16px; line-height: 1.6; }</pre>
+      </div>
+      <div class="text-box">
+        <p>تحدد <code>font-family</code> نوع الخط، <code>font-size</code> حجم النص، و<code>line-height</code> المسافة بين الأسطر.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- الصناديق -->
+  <section class="section" id="boxes">
+    <h2>الصناديق والتنسيق</h2>
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: صندوق مع حواف وتباعد</strong><button class="copy-btn" data-target="code-boxes">نسخ</button></div>
+        <pre id="code-boxes" dir="ltr">.card {
+  background-color: #071021;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}</pre>
+      </div>
+      <div class="text-box">
+        <p>CSS يمكنه تصميم الصناديق عن طريق الخلفية، الحواف، الحواف المستديرة، والظل لتبرز العناصر.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Flexbox -->
+  <section class="section" id="flexbox">
+    <h2>Flexbox لتنسيق العناصر</h2>
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: صف بعناصر</strong><button class="copy-btn" data-target="code-flex">نسخ</button></div>
+        <pre id="code-flex" dir="ltr">.container {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+}</pre>
+      </div>
+      <div class="text-box">
+        <p>Flexbox يسهل توزيع العناصر داخل الحاوية بشكل أفقي أو عمودي مع محاذاة وتباعد سهل.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grid -->
+  <section class="section" id="grid">
+    <h2>Grid لتخطيطات متقدمة</h2>
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: شبكة 3 أعمدة</strong><button class="copy-btn" data-target="code-grid">نسخ</button></div>
+        <pre id="code-grid" dir="ltr">.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}</pre>
+      </div>
+      <div class="text-box">
+        <p>Grid يسمح بتصميم تخطيطات معقدة بسهولة مع تحديد عدد الأعمدة والمسافات بين العناصر.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- التدرجات -->
+  <section class="section" id="gradients">
+    <h2>التدرجات والألوان المتغيرة</h2>
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: خلفية متدرجة</strong><button class="copy-btn" data-target="code-gradients">نسخ</button></div>
+        <pre id="code-gradients" dir="ltr">.banner {
+  background: linear-gradient(90deg, #00bfff, #8a00ff);
+  color: #000;
+  padding: 20px;
+  text-align: center;
+}</pre>
+      </div>
+      <div class="text-box">
+        <p>يمكن إنشاء تدرجات خطية أو دائرية لتعطي تصميم جذاب وألوان متدرجة للعناصر.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- مشروع صغير -->
+  <section class="section" id="project">
+    <h2>مشروع صغير: بطاقة تعريفية</h2>
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: بطاقة تعريفية CSS</strong><button class="copy-btn" data-target="code-project">نسخ</button></div>
+        <pre id="code-project" dir="ltr">&lt;div class="card"&gt;
+  &lt;h2&gt;أحمد جعفر&lt;/h2&gt;
+  &lt;p&gt;مطور ويب&lt;/p&gt;
+&lt;/div&gt;
+
+<style>
+.card {
+  background: linear-gradient(90deg,#00bfff,#8a00ff);
+  color:#fff;
+  padding:20px;
+  border-radius:12px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,0.5);
+}
+</style></pre>
+      </div>
+      <div class="text-box">
+        <p>المشروع يجمع الألوان، التدرجات، الصناديق، النصوص، والظل. جرب تغييرات لتخصيص البطاقة.</p>
+      </div>
+    </div>
+  </section>
+
+   <div style="text-align:center;margin-top:18px">
+    <h3>انتهى الكورس المجاني للغة CSS</h3>
+    <a class="copy-btn" style="display:inline-block;margin-top:10px;padding:12px 18px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#000;font-weight:800;border-radius:10px;text-decoration:none" href="paid.html">اشترك الآن في النسخة المدفوعة 💳</a>
+  </div>
+
+  <div class="footer">جميع الحقوق محفوظة © أكاديمية جعفر للبرمجة</div>
+</main>
+
+<script>
+/* MATRIX RAIN */
+const canvas = document.getElementById('codeRain');
+const ctx = canvas.getContext('2d');
+function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+const chars="01<>[]{}#@$&*/+-=";
+const fontSize=16;
+let columns=Math.floor(canvas.width/fontSize);
+let drops=new Array(columns).fill(0).map(()=>Math.floor(Math.random()*canvas.height/fontSize));
+
+function draw(){
+  ctx.fillStyle="rgba(0,0,0,0.06)";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="#ffd54a";
+  ctx.font=fontSize+"px monospace";
+  columns=Math.floor(canvas.width/fontSize);
+  if(drops.length<columns){while(drops.length<columns)drops.push(0);}
+  else if(drops.length>columns)drops=drops.slice(0,columns);
+  for(let i=0;i<columns;i++){
+    const char=chars[Math.floor(Math.random()*chars.length)];
+    ctx.fillText(char,i*fontSize,drops[i]*fontSize);
+    if(drops[i]*fontSize>canvas.height && Math.random()>0.975) drops[i]=0;
+    drops[i]++;
+  }
+}
+setInterval(draw,40);
+
+/* Copy buttons */
+document.querySelectorAll('.copy-btn').forEach(btn=>{
+  btn.addEventListener('click', async ()=>{
+    const id=btn.getAttribute('data-target');
+    const el=document.getElementById(id);
+    if(!el){const pre=btn.closest('.code-box').querySelector('pre');if(pre){try{await navigator.clipboard.writeText(pre.textContent);btn.textContent='تم النسخ';setTimeout(()=>btn.textContent='نسخ',1500);}catch(e){alert('فشل النسخ');}}return;}
+    try{await navigator.clipboard.writeText(el.textContent);const old=btn.textContent;btn.textContent='تم النسخ';setTimeout(()=>btn.textContent=old,1300);}catch(e){const range=document.createRange();range.selectNodeContents(el);const sel=window.getSelection();sel.removeAllRanges();sel.addRange(range);try{document.execCommand('copy');btn.textContent='تم النسخ';setTimeout(()=>btn.textContent='نسخ',1300);}catch(err){alert('نسخ فشل — انسخ يدوياً')}sel.removeAllRanges();}
+  });
+});
+</script>
+
+</body>
+</html>

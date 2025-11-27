@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>كورس Objective-C - أكاديمية جعفر</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#000;
+  --card: rgba(255,255,255,0.03);
+  --accent:#00bfff;
+  --accent-2:#8a00ff;
+  --highlight:#ffd54a;
+  --text:#e8f8ff;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;font-family:"Cairo",sans-serif}
+html,body{height:100%}
+body{
+  background:var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  padding-bottom:80px;
+}
+
+/* header */
+.header{
+  position:fixed; top:0; left:0; right:0;
+  height:72px; display:flex; align-items:center; justify-content:space-between;
+  padding:0 28px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.35));
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid rgba(255,255,255,0.03);
+  z-index:1000;
+}
+nav{display:flex; gap:25px;}
+nav a{color:white; text-decoration:none; font-size:16px; font-weight:600; position:relative; transition:0.3s;}
+nav a::after{content:""; position:absolute; bottom:-5px; left:0; width:0%; height:2px; background:#00f7ff; box-shadow:0 0 10px #00f7ff; transition:0.3s;}
+nav a:hover{color:#00f7ff; text-shadow:0 0 8px #00f7ff;}
+nav a:hover::after{width:100%;}
+.logo{font-weight:800;color:var(--accent-2);text-shadow:0 0 12px rgba(138,0,255,0.18);font-size:18px}
+.header-nav{display:flex;gap:14px;align-items:center}
+.header-nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:700;opacity:0.95}
+.header-nav a:hover{background:rgba(255,255,255,0.02);color:var(--accent);}
+
+/* canvas background */
+#codeRain{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:0.18}
+
+/* main */
+.main{max-width:1100px;margin:110px auto 60px;padding:22px}
+.title{text-align:center;margin-bottom:10px;}
+.title h1{font-size:32px;color:var(--highlight);text-shadow:0 0 14px rgba(255,213,74,0.06)}
+.lead{max-width:900px;margin:8px auto;color:#bfefff;line-height:1.7;text-align:center}
+
+/* section card */
+.section{margin-top:26px;padding:18px;border-radius:12px;background:linear-gradient(180deg,var(--card),rgba(255,255,255,0.01));box-shadow:0 10px 40px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.02)}
+.section h2{color:var(--accent);font-size:22px;margin-bottom:12px}
+.section .meta{color:#aee9ff;margin-bottom:10px}
+
+/* lesson layout */
+.lesson{display:flex;gap:18px;flex-direction:column;margin-top:12px}
+@media(min-width:900px){
+  .lesson{flex-direction:row}
+}
+.code-box{
+  flex:1;
+  min-width:320px;
+  background:#071021;
+  padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+  overflow:auto;font-family:monospace;font-size:14px;color:#cfefff;
+}
+.text-box{
+  flex:1;
+  min-width:260px;padding:10px;color:#dff7ff;
+}
+.code-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.copy-btn{
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  color:#000;padding:8px 12px;border-radius:8px;font-weight:800;border:none;cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,187,255,0.08);
+}
+.copy-btn:active{transform:scale(0.98)}
+
+/* small project */
+.project{margin-top:12px;padding:12px;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02)}
+.study-tip{margin-top:10px;padding:10px;border-radius:8px;background:linear-gradient(180deg, rgba(0,191,255,0.03), rgba(138,0,255,0.02));color:#dff7ff}
+
+/* footer */
+.footer{margin-top:18px;text-align:center;color:#9fdcff;font-size:13px}
+
+/* responsive tweaks */
+@media(max-width:420px){
+  .header{padding:0 12px}
+  .title h1{font-size:24px}
+  .copy-btn{padding:8px 10px;font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">أكاديمية جعفر للبرمجة</div>
+  <nav class="header-nav">
+          <a href="index.html">الرئيسية</a>
+          <a href="free.html">المحتوى المجاني</a>
+          <a href="paid.html">المحتوى المدفوع</a>
+  </nav>
+</header>
+
+<canvas id="codeRain"></canvas>
+
+<main class="main">
+  <div class="title">
+    <h1>كورس Objective-C — المجاني</h1>
+    <p class="lead">المحتوى المجاني يغطي أساسيات Objective-C: المتغيرات، الأنواع، الطباعة، الجمل الشرطية، الحلقات، الدوال، الكائنات، مع مشروع صغير.</p>
+  </div>
+
+  <!-- المتغيرات -->
+  <section class="section" id="variables">
+    <h2>المتغيرات Variables</h2>
+    <div class="meta">تعريف المتغيرات في Objective-C.</div>
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: متغيرات</strong><button class="copy-btn" data-target="code-var">نسخ</button></div>
+        <pre id="code-var" dir="ltr">NSString *name = @"أحمد";
+int age = 25;
+
+NSLog(@"مرحباً %@، عمرك %d", name, age);</pre>
+      </div>
+      <div class="text-box">
+        <p>المتغيرات النصية تحتاج <code>NSString *</code>، والمتغيرات الرقمية <code>int</code> أو <code>float</code>. الطباعة باستخدام <code>NSLog</code>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- الجمل الشرطية -->
+  <section class="section" id="conditions">
+    <h2>الجمل الشرطية If/Else</h2>
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: شرط</strong><button class="copy-btn" data-target="code-if">نسخ</button></div>
+        <pre id="code-if" dir="ltr">int score = 70;
+
+if(score >= 50){
+  NSLog(@"ناجح");
+}else{
+  NSLog(@"راسب");
+}</pre>
+      </div>
+      <div class="text-box">
+        <p>الشروط تستخدم الأقواس لتحديد نطاق التنفيذ، و <code>if</code> و <code>else</code>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- الحلقات -->
+  <section class="section" id="loops">
+    <h2>الحلقات Loops</h2>
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: حلقة for</strong><button class="copy-btn" data-target="code-loop">نسخ</button></div>
+        <pre id="code-loop" dir="ltr">for(int i=1; i<=5; i++){
+  NSLog(@"العدد %d", i);
+}</pre>
+      </div>
+      <div class="text-box">
+        <p>الحلقات <code>for</code> تكرر تنفيذ الكود عدة مرات، هنا لطباعة الأعداد من 1 إلى 5.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- الدوال -->
+  <section class="section" id="functions">
+    <h2>الدوال Functions</h2>
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: دالة جمع</strong><button class="copy-btn" data-target="code-func">نسخ</button></div>
+        <pre id="code-func" dir="ltr">- (int)add:(int)a with:(int)b{
+    return a + b;
+}
+
+int result = [self add:5 with:3];
+NSLog(@"النتيجة = %d", result);</pre>
+      </div>
+      <div class="text-box">
+        <p>تعريف الدوال داخل الكلاس باستخدام <code>- (نوع الإرجاع)</code>، واستدعاء الدوال باستخدام الأقواس <code>[object method]</code>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- الكائنات -->
+  <section class="section" id="objects">
+    <h2>الكائنات Objects</h2>
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: إنشاء كائن</strong><button class="copy-btn" data-target="code-obj">نسخ</button></div>
+        <pre id="code-obj" dir="ltr">@interface Person : NSObject
+@property NSString *name;
+@property int age;
+@end
+
+Person *p = [Person new];
+p.name = @"أحمد";
+p.age = 25;
+NSLog(@"الاسم %@، العمر %d", p.name, p.age);</pre>
+      </div>
+      <div class="text-box">
+        <p>الكائنات تُعرف باستخدام <code>@interface</code>، وخصائص الكائن <code>@property</code>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- مشروع صغير -->
+  <section class="section" id="project">
+    <h2>مشروع صغير: حساب مجموع أعداد</h2>
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: مجموع أعداد</strong><button class="copy-btn" data-target="code-project">نسخ</button></div>
+        <pre id="code-project" dir="ltr">int numbers[] = {10, 20, 30, 40, 50};
+int sum = 0;
+
+for(int i=0; i<5; i++){
+    sum += numbers[i];
+}
+
+NSLog(@"المجموع = %d", sum);</pre>
+      </div>
+      <div class="text-box">
+        <p>المشروع يجمع بين المتغيرات، الحلقات، والطباعة لحساب مجموع عناصر مصفوفة.</p>
+      </div>
+    </div>
+  </section>
+
+  <div style="text-align:center;margin-top:18px">
+    <h3>انتهى الكورس المجاني للغة Objective-C</h3>
+    <a class="copy-btn" style="display:inline-block;margin-top:10px;padding:12px 18px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#000;font-weight:800;border-radius:10px;text-decoration:none" href="paid.html">اشترك الآن في النسخة المدفوعة 💳</a>
+  </div>
+
+  <div class="footer">جميع الحقوق محفوظة © أكاديمية جعفر للبرمجة</div>
+</main>
+
+<script>
+/* MATRIX RAIN */
+const canvas = document.getElementById('codeRain');
+const ctx = canvas.getContext('2d');
+function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+const chars="01<>[]{}#@$&*/+-=";
+const fontSize=16;
+let columns=Math.floor(canvas.width/fontSize);
+let drops=new Array(columns).fill(0).map(()=>Math.floor(Math.random()*canvas.height/fontSize));
+
+function draw(){
+  ctx.fillStyle="rgba(0,0,0,0.06)";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="#ffd54a";
+  ctx.font=fontSize+"px monospace";
+  columns=Math.floor(canvas.width/fontSize);
+  if(drops.length<columns){while(drops.length<columns)drops.push(0);}
+  else if(drops.length>columns)drops=drops.slice(0,columns);
+  for(let i=0;i<columns;i++){
+    const char=chars[Math.floor(Math.random()*chars.length)];
+    ctx.fillText(char,i*fontSize,drops[i]*fontSize);
+    if(drops[i]*fontSize>canvas.height && Math.random()>0.975) drops[i]=0;
+    drops[i]++;
+  }
+}
+setInterval(draw,40);
+
+/* Copy buttons */
+document.querySelectorAll('.copy-btn').forEach(btn=>{
+  btn.addEventListener('click', async ()=>{
+    const id=btn.getAttribute('data-target');
+    const el=document.getElementById(id);
+    if(!el){const pre=btn.closest('.code-box').querySelector('pre');if(pre){try{await navigator.clipboard.writeText(pre.textContent);btn.textContent='تم النسخ';setTimeout(()=>btn.textContent='نسخ',1500);}catch(e){alert('فشل النسخ');}}return;}
+    try{await navigator.clipboard.writeText(el.textContent);const old=btn.textContent;btn.textContent='تم النسخ';setTimeout(()=>btn.textContent=old,1300);}catch(e){const range=document.createRange();range.selectNodeContents(el);const sel=window.getSelection();sel.removeAllRanges();sel.addRange(range);try{document.execCommand('copy');btn.textContent='تم النسخ';setTimeout(()=>btn.textContent='نسخ',1300);}catch(err){alert('نسخ فشل — انسخ يدوياً')}sel.removeAllRanges();}
+  });
+});
+</script>
+
+</body>
+</html>

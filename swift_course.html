@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>كورس Swift - أكاديمية جعفر للبرمجة</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#000;
+  --card: rgba(255,255,255,0.03);
+  --accent:#00bfff;
+  --accent-2:#8a00ff;
+  --highlight:#ffd54a;
+  --text:#e8f8ff;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;font-family:"Cairo",sans-serif}
+html,body{height:100%}
+body{
+  background:var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  padding-bottom:80px;
+}
+
+/* header */
+.header{
+  position:fixed; top:0; left:0; right:0;
+  height:72px; display:flex; align-items:center; justify-content:space-between;
+  padding:0 28px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.35));
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid rgba(255,255,255,0.03);
+  z-index:1000;
+}
+.logo{font-weight:800;color:var(--accent-2);text-shadow:0 0 12px rgba(138,0,255,0.18);font-size:18px}
+.header-nav{display:flex;gap:14px;align-items:center}
+.header-nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:700;opacity:0.95}
+.header-nav a:hover{background:rgba(255,255,255,0.02);color:var(--accent);}
+
+/* canvas background */
+#codeRain{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:0.18}
+
+/* main */
+.main{max-width:1100px;margin:110px auto 60px;padding:22px}
+.title{text-align:center;margin-bottom:10px;}
+.title h1{font-size:32px;color:var(--highlight);text-shadow:0 0 14px rgba(255,213,74,0.06)}
+.lead{max-width:900px;margin:8px auto;color:#bfefff;line-height:1.7;text-align:center}
+
+/* section card */
+.section{margin-top:26px;padding:18px;border-radius:12px;background:linear-gradient(180deg,var(--card),rgba(255,255,255,0.01));box-shadow:0 10px 40px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.02)}
+.section h2{color:var(--accent);font-size:22px;margin-bottom:12px}
+.section .meta{color:#aee9ff;margin-bottom:10px}
+
+/* lesson layout */
+.lesson{display:flex;gap:18px;flex-direction:column;margin-top:12px}
+@media(min-width:900px){
+  .lesson{flex-direction:row}
+}
+.code-box{
+  flex:1;
+  min-width:320px;
+  background:#071021;
+  padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+  overflow:auto;font-family:monospace;font-size:14px;color:#cfefff;
+}
+.text-box{
+  flex:1;
+  min-width:260px;padding:10px;color:#dff7ff;line-height:1.7;
+}
+.code-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.copy-btn{
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  color:#000;padding:8px 12px;border-radius:8px;font-weight:800;border:none;cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,187,255,0.08);
+}
+.copy-btn:active{transform:scale(0.98)}
+
+/* project and tips */
+.project{margin-top:12px;padding:12px;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02)}
+.study-tip{margin-top:10px;padding:10px;border-radius:8px;background:linear-gradient(180deg, rgba(0,191,255,0.03), rgba(138,0,255,0.02));color:#dff7ff}
+
+/* footer */
+.footer{margin-top:18px;text-align:center;color:#9fdcff;font-size:13px}
+
+/* responsive tweaks */
+@media(max-width:420px){
+  .header{padding:0 12px}
+  .title h1{font-size:24px}
+  .copy-btn{padding:8px 10px;font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">أكاديمية جعفر للبرمجة</div>
+  <nav class="header-nav">
+          <a href="index.html">الرئيسية</a>
+          <a href="free.html">المحتوى المجاني</a>
+          <a href="paid.html">النسخة المدفوعة</a>
+  </nav>
+</header>
+
+<canvas id="codeRain"></canvas>
+
+<main class="main">
+  <div class="title">
+    <h1>كورس Swift — (المجاني - 10 دروس)</h1>
+    <p class="lead">محتوى عملي ومدروس: مقدمة، المتغيرات والأنواع، الشروط، الحلقات، الدوال، الـOOP (Class)، Struct & Enum، Collections، Optionals وError Handling، مشروع صغير.</p>
+  </div>
+
+  <!-- درس 1: مقدمة -->
+  <section class="section" id="intro">
+    <h2>الدرس 1 — مقدمة عن Swift</h2>
+    <div class="meta">Swift هي لغة برمجة عصرية طورتها Apple لتطوير تطبيقات iOS, macOS, watchOS و tvOS. تتميز بالسلامة، الأداء، وسهولة القراءة.</div>
+
+    <div class="lesson">
+      <div class="code-box" aria-label="Hello Swift">
+        <div class="code-head">
+          <strong>مثال: Hello World</strong>
+          <button class="copy-btn" data-target="code-hello">نسخ</button>
+        </div>
+        <pre id="code-hello" dir="ltr">import Foundation
+
+print("مرحباً بك في Swift!")</pre>
+      </div>
+
+      <div class="text-box">
+        <ol>
+          <li><code>import Foundation</code> — هذا يستورد مكتبة الـFoundation التي تحتوي أدوات أساسية (تنسيق نص، تواريخ، والعديد من الوظائف المفيدة). في مشاريع بسيطة ممكن تعمل بدونها، لكن من الجيد وجودها.</li>
+          <li><code>print("مرحباً بك في Swift!")</code> — دالة لطباعة نص في الطرفية (Console). بين قوسي التنصيص نضع النص المراد طباعته.</li>
+        </ol>
+        <p class="project"><strong>تجربة:</strong> احفظ الملف باسم <code>main.swift</code> ثم نفذ عبر بيئة Swift (Xcode Playground أو Swift CLI) لتشوف النتيجة.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- درس 2: المتغيرات والأنواع -->
+  <section class="section" id="variables">
+    <h2>الدرس 2 — المتغيرات (var) والثوابت (let) وأنواع البيانات</h2>
+
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: تعريف متغير وثابت وأنواع</strong><button class="copy-btn" data-target="code-vars">نسخ</button></div>
+        <pre id="code-vars" dir="ltr">let pi: Double = 3.14159
+var name: String = "Ahmed"
+var age: Int = 25
+var isStudent: Bool = true
+
+// Type inference
+var inferred = "نص"  // Swift ستعرف أنه String</pre>
+      </div>
+
+      <div class="text-box">
+        <p><strong>let</strong> تُستخدم لتعريف ثابت لا يتغير. إذا حاولت تعديل قيمة ثابت ستحصل على خطأ عند الترجمة. <strong>var</strong> تستخدم لتعريف متغير يمكن تغييره.</p>
+        <p>بعد اسم المتغير يمكن كتابة نوعه بعد نقطتين (<code>:</code>) مثل <code>Int</code>, <code>Double</code>, <code>String</code>, <code>Bool</code> — هذا يُسمّى<strong>الكتابة الصريحة</strong> (Explicit typing).</p>
+        <p>Swift تدعم أيضاً <strong>استنتاج النوع</strong> (Type inference) فلو كتبت <code>var inferred = "نص"</code> فسوف تعتبره String تلقائياً.</p>
+        <div class="study-tip">نصيحة: استخدم <code>let</code> دائماً ما أمكن — يجعل الكود أكثر أمانًا وأسهل في المتابعة.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- درس 3: الشروط -->
+  <section class="section" id="control">
+    <h2>الدرس 3 — الشروط (if / switch)</h2>
+
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: if و switch</strong><button class="copy-btn" data-target="code-control">نسخ</button></div>
+        <pre id="code-control" dir="ltr">let score = 85
+
+if score >= 90 {
+    print("ممتاز")
+} else if score >= 75 {
+    print("جيد جداً")
+} else {
+    print("محتاج شغل")
+}
+
+// switch
+let grade = "B"
+switch grade {
+case "A":
+    print("ممتاز")
+case "B":
+    print("جيد")
+default:
+    print("غير معروف")
+}</pre>
+      </div>
+
+      <div class="text-box">
+        <p>جملة <code>if</code> تعمل مقارنة شرطية. لاحظ استخدام المشغلات <code>&gt;=</code> و<code>else if</code> للسلسلة.</p>
+        <p><code>switch</code> في Swift قوي: يقبل أنواع متعددة ويمكنه استخدام نطاقات، تركيبات، وحتى استدعاء حالات متعددة في سطر واحد. هنا مثال بسيط يوضح الانتقال بين الحالات.</p>
+        <div class="project"><strong>مهمة:</strong> غيّر قيمة <code>score</code> وجرب كيف يتغير المخرج.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- درس 4: الحلقات -->
+  <section class="section" id="loops">
+    <h2>الدرس 4 — الحلقات (for, while, repeat-while)</h2>
+
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: حلقات</strong><button class="copy-btn" data-target="code-loops">نسخ</button></div>
+        <pre id="code-loops" dir="ltr">// for-in
+for i in 1...5 {
+    print(i)
+}
+
+// while
+var j = 1
+while j <= 3 {
+    print("while:", j)
+    j += 1
+}
+
+// repeat-while (نفّذ أولاً ثم تحقق)
+var k = 1
+repeat {
+    print("repeat:", k)
+    k += 1
+} while k <= 2</pre>
+      </div>
+
+      <div class="text-box">
+        <p><code>for-in</code> في Swift سهل القراءة: نطاق <code>1...5</code> يعني من 1 إلى 5 شامل. الحلقات <code>while</code> تفحص الشرط قبل التنفيذ؛ أما <code>repeat-while</code> فتضمن تنفيذ الجسم مرة على الأقل قبل فحص الشرط.</p>
+        <div class="study-tip">انتبه لاستخدام نطاقات سلسلة (مثل <code>..<</code> الذي يستبعد الحد الأعلى) لتجنّب الأخطاء.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- درس 5: الدوال -->
+  <section class="section" id="functions">
+    <h2>الدرس 5 — الدوال (Functions)</h2>
+
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: تعريف واستدعاء دالة</strong><button class="copy-btn" data-target="code-func">نسخ</button></div>
+        <pre id="code-func" dir="ltr">func greet(name: String) -> String {
+    return "مرحباً، \(name)!"
+}
+
+let message = greet(name: "Ahmed")
+print(message)</pre>
+      </div>
+
+      <div class="text-box">
+        <p>الكلمة <code>func</code> تُعرّف الدالة. بين القوسين نضع المعاملات مع نوع كل واحد. بعد السهم <code>-></code> نضع نوع القيمة المرجعة (Return Type).</p>
+        <p>داخل الدالة نستخدم <code>return</code> لإعادة قيمة. المثال يستخدم <strong>string interpolation</strong> — وضع متغير داخل نص عن طريق <code>\(name)</code>.</p>
+        <div class="project"><strong>تحدي:</strong> غيّر الدالة لتقبل متغيرين (الاسم والعمر) وتعيد جملة تصف الشخص.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- درس 6: OOP بالـ Class -->
+  <section class="section" id="oop">
+    <h2>الدرس 6 — البرمجة كائنية التوجه (Class)</h2>
+
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: class و object</strong><button class="copy-btn" data-target="code-oop">نسخ</button></div>
+        <pre id="code-oop" dir="ltr">class Person {
+    var name: String
+    var age: Int
+
+    init(name: String, age: Int) {
+        self.name = name
+        self.age = age
+    }
+
+    func sayHello() {
+        print("مرحباً، أنا \\(name) وعمري \\(age)")
+    }
+}
+
+let p = Person(name: "Sara", age: 30)
+p.sayHello()</pre>
+      </div>
+
+      <div class="text-box">
+        <ol>
+          <li><code>class Person { ... }</code> — تعريف قالب (class) يسمى Person.</li>
+          <li><code>var name: String</code> و<code>var age: Int</code> — خصائص (properties) لكل كائن من Person.</li>
+          <li><code>init(...)</code> — المُنشئ (constructor) الذي يتم استدعاؤه عند إنشاء كائن جديد. <code>self</code> تشير إلى الكائن الحالي.</li>
+          <li><code>func sayHello()</code> — دالة داخل الكلاس تظهر رسالة باستخدام خصائص الكائن.</li>
+          <li>بإنشاء <code>let p = Person(...)</code> نكون قد أنشأنا مثيلاً (instance) ثم نستخدم <code>p.sayHello()</code> لاستدعاء الدالة.</li>
+        </ol>
+        <div class="study-tip">في Swift، الـClass تُعامل كمرجعية (reference type) — التعديل على نسخة يؤثر على الأصل.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- درس 7: Struct و Enum -->
+  <section class="section" id="structs">
+    <h2>الدرس 7 — Structs و Enums</h2>
+
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: struct و enum</strong><button class="copy-btn" data-target="code-struct">نسخ</button></div>
+        <pre id="code-struct" dir="ltr">struct Point {
+    var x: Double
+    var y: Double
+}
+
+enum Direction {
+    case up, down, left, right
+}
+
+let p = Point(x: 3.0, y: 4.0)
+let dir = Direction.up
+print(p.x, p.y, dir)</pre>
+      </div>
+
+      <div class="text-box">
+        <p><code>struct</code> شبيه بالـclass لكنه قيمة (value type) — يعني يُنسخ عند التعيين أو الإرسال للدوال. مناسب للبيانات البسيطة.</p>
+        <p><code>enum</code> يُعرّف مجموعة ثوابت مسمّاة. مفيد لتمثيل حالات محددة مثل اتجاهات أو حالات شبكة الاتصال.</p>
+        <div class="project"><strong>تطبيق:</strong> أنشئ enum يمثل حالات مهمة (new, inProgress, done) واستخدمه في Task struct.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- درس 8: المجموعات (Arrays, Dictionary, Set) -->
+  <section class="section" id="collections">
+    <h2>الدرس 8 — المجموعات: Array, Dictionary, Set</h2>
+
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: مجموعات</strong><button class="copy-btn" data-target="code-collections">نسخ</button></div>
+        <pre id="code-collections" dir="ltr">var numbers: [Int] = [1, 2, 3]
+numbers.append(4)
+
+var dict: [String: Int] = ["apple": 3, "banana": 5]
+dict["orange"] = 2
+
+var set: Set<String> = ["a", "b"]
+set.insert("c")
+
+print(numbers, dict, set)</pre>
+      </div>
+
+      <div class="text-box">
+        <p><code>Array</code> مرتبة وتقبل عناصر مكررة. <code>Dictionary</code> خريطة Key-Value، حيث لكل مفتاح قيمة مرتبطة به. <code>Set</code> مجموعة غير مرتبة من القيم الفريدة.</p>
+        <p>استخدام دوال مثل <code>append</code> و<code>insert</code> لإضافة عناصر. للوصول لقيمة في القاموس تستخدم المفتاح <code>dict["apple"]</code>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- درس 9: Optionals و Error Handling -->
+  <section class="section" id="optionals">
+    <h2>الدرس 9 — Optionals و Error Handling</h2>
+
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>مثال: Optionals و try/catch</strong><button class="copy-btn" data-target="code-optionals">نسخ</button></div>
+        <pre id="code-optionals" dir="ltr">var maybeName: String? = nil
+
+// safe unwrapping
+if let name = maybeName {
+    print("الاسم:", name)
+} else {
+    print("لا يوجد اسم")
+}
+
+// مثال على Error Handling
+enum MyError: Error {
+    case runtimeError(String)
+}
+
+func riskyAction(shouldFail: Bool) throws {
+    if shouldFail {
+        throw MyError.runtimeError("حصل خطأ")
+    }
+    print("نجحنا")
+}
+
+do {
+    try riskyAction(shouldFail: false)
+} catch {
+    print("تعاملنا مع الخطأ:", error)
+}</pre>
+      </div>
+
+      <div class="text-box">
+        <p>الـ<code>Optional</code> هو نوع يمكن أن يحتوي قيمة أو لا (<code>nil</code>). هذا يساعد Swift على تجنب أخطاء الـnull. لفك التغليف بأمان نستخدم <code>if let</code> أو <code>guard let</code>.</p>
+        <p>للتعامل مع الأخطاء تُعرّف دوال <code>throws</code> وتستدعى ب<code>try</code>. داخل كتلة <code>do-catch</code> يمكنك التقاط الأخطاء ومعالجتها.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- درس 10: مشروع صغير -->
+  <section class="section" id="project">
+    <h2>الدرس 10 — مشروع صغير: مدير مهام بسيط (Console)</h2>
+
+    <div class="lesson">
+      <div class="code-box">
+        <div class="code-head"><strong>ملخص المشروع - أكواد أساسية</strong><button class="copy-btn" data-target="code-project">نسخ</button></div>
+        <pre id="code-project" dir="ltr">// Task.swift
+struct Task {
+    var title: String
+    var done: Bool = false
+}
+
+// TaskManager.swift (مبسط)
+var tasks: [Task] = []
+
+func addTask(title: String) {
+    tasks.append(Task(title: title))
+}
+
+func listTasks() {
+    for (i, t) in tasks.enumerated() {
+        print("\\(i+1). [\\(t.done ? "x" : " ")] \\(t.title)")
+    }
+}
+
+// App.swift - واجهة بسيطة
+addTask(title: "تعلم Swift")
+addTask(title: "بناء مشروع")
+
+listTasks()</pre>
+      </div>
+
+      <div class="text-box">
+        <p><strong>Task struct</strong>: يحتوي على عنوان المهمة وحالة الإنجاز الافتراضية <code>false</code>. استخدام struct مناسب هنا لأن كل مهمة قيمة مستقلة.</p>
+        <p><strong>tasks array</strong>: مصفوفة لتخزين كل المهام.</p>
+        <p><strong>addTask</strong>: دالة تضيف مهمة جديدة للمصفوفة. لاحظ أننا نستخدم <code>append</code>.</p>
+        <p><strong>listTasks</strong>: تستعرض المهام مع رقمها وحالة الإنجاز. استخدام <code>enumerated()</code> يعطينا فهرساً لكل عنصر.</p>
+        <div class="project"><strong>توسعة مقترحة:</strong> أضف وظائف للحذف، للإشارة إلى الإنجاز (toggle)، ولحفظ البيانات في ملف نصي باستخدام Foundation.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- resources -->
+  <section class="section" id="resources">
+    <h2>موارد ونصائح عملية</h2>
+    <div class="lesson">
+      <div class="text-box" style="flex:1">
+        <ul style="line-height:1.8;margin-left:14px">
+          <li>استخدم Xcode أو Swift Playgrounds لتجربة الكود فورياً.</li>
+          <li>اقرأ التوثيق الرسمي: Apple Developer docs.</li>
+          <li>ابدأ بمشاريع صغيرة — كل درس طبّقه عمليًا.</li>
+        </ul>
+        <div class="study-tip">نصيحة: كرر الأمثلة وعدّل القيم لتتعرّف على سلوك اللغة؛ التجربة العملية أهم من القراءة وحدها.</div>
+      </div>
+      <div class="text-box" style="flex:0.8">
+        <h3 style="color:var(--accent)">خريطة الطريق المقترحة</h3>
+        <ol style="line-height:1.8;color:#dff7ff">
+          <li>نفّذ الأمثلة المحلية (Playground).</li>
+          <li>ابني مشاريع صغيرة مثل Todo Console، ثم انتقل لتطبيق iOS بسيط.</li>
+          <li>تعلم استخدام الـAPI والـNetworking بعد إتقان الأساسيات.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <div style="text-align:center;margin-top:18px">
+    <h3>انتهى الكورس المجاني للغة Swift </h3>
+    <a class="copy-btn" style="display:inline-block;margin-top:10px;padding:12px 18px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#000;font-weight:800;border-radius:10px;text-decoration:none" href="paid.html">اشترك الآن في النسخة المدفوعة 💳</a>
+  </div>
+
+  <div class="footer">جميع الحقوق محفوظة © أكاديمية جعفر للبرمجة</div>
+</main>
+
+<script>
+/* MATRIX RAIN */
+const canvas = document.getElementById('codeRain');
+const ctx = canvas.getContext('2d');
+function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+const chars = "01<>[]{}#@$&*/+-=";
+const fontSize = 16;
+let columns = Math.floor(canvas.width / fontSize);
+let drops = new Array(columns).fill(0).map(()=>Math.floor(Math.random()*canvas.height/fontSize));
+
+function draw(){
+  ctx.fillStyle = "rgba(0,0,0,0.06)";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle = "#ffd54a";
+  ctx.font = fontSize + "px monospace";
+  columns = Math.floor(canvas.width / fontSize);
+  if (drops.length < columns) {
+    while (drops.length < columns) drops.push(0);
+  } else if (drops.length > columns) {
+    drops = drops.slice(0, columns);
+  }
+  for(let i=0;i<columns;i++){
+    const char = chars[Math.floor(Math.random()*chars.length)];
+    ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+    if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+    drops[i]++;
+  }
+}
+setInterval(draw, 40);
+
+/* Copy buttons */
+document.querySelectorAll('.copy-btn').forEach(btn=>{
+  btn.addEventListener('click', async ()=>{
+    const id = btn.getAttribute('data-target');
+    const el = document.getElementById(id);
+    if(!el){
+      const pre = btn.closest('.code-box').querySelector('pre');
+      if(pre){
+        try{ await navigator.clipboard.writeText(pre.textContent); btn.textContent='تم النسخ'; setTimeout(()=>btn.textContent='نسخ',1500); }catch(e){ alert('فشل النسخ'); }
+      }
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(el.textContent);
+      const old = btn.textContent;
+      btn.textContent = 'تم النسخ';
+      setTimeout(()=> btn.textContent = old, 1300);
+    } catch(e) {
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      try {
+        document.execCommand('copy');
+        btn.textContent = 'تم النسخ';
+        setTimeout(()=>btn.textContent='نسخ',1300);
+      } catch(err){
+        alert('نسخ فشل — انسخ يدوياً');
+      }
+      sel.removeAllRanges();
+    }
+  });
+});
+</script>
+
+</body>
+</html>

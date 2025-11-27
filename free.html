@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المحتوى المجاني - أكاديمية جعفر للبرمجة</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Cairo",sans-serif;}
+body{background:#000;color:white;overflow-x:hidden;}
+
+/* MATRIX RAIN */
+#codeRain{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:0.2;}
+
+/* HEADER */
+.main-header{
+    position:fixed; top:0; left:0; width:100%; height:80px; padding:0 40px;
+    display:flex; justify-content:space-between; align-items:center;
+    backdrop-filter: blur(12px); background: rgba(0,0,0,0.35);
+    border-bottom:1px solid rgba(0,255,255,0.2);
+    box-shadow:0 0 15px rgba(0,255,255,0.25);
+    z-index:1000;
+}
+.logo-box{display:flex; align-items:center; gap:12px;}
+.logo-img{height:50px; width:auto; filter: drop-shadow(0 0 1px #fffb00); transition:0.3s;}
+.logo-img:hover{filter: drop-shadow(0 0 20px #00e1ff); transform:scale(1.05);}
+.logo-text{font-size:22px; font-weight:700; color:white; text-shadow:0 0 12px #00f7ff;}
+
+nav{display:flex; gap:25px;}
+nav a{color:white; text-decoration:none; font-size:16px; font-weight:600; position:relative; transition:0.3s;}
+nav a::after{content:""; position:absolute; bottom:-5px; left:0; width:0%; height:2px; background:#00f7ff; box-shadow:0 0 10px #00f7ff; transition:0.3s;}
+nav a:hover{color:#00f7ff; text-shadow:0 0 8px #00f7ff;}
+nav a:hover::after{width:100%;}
+
+.menu-toggle{display:none; flex-direction:column; gap:5px; cursor:pointer;}
+.menu-toggle span{width:30px; height:4px; background:#00f7ff; border-radius:5px; box-shadow:0 0 8px #00f7ff; transition:0.3s;}
+@media(max-width:750px){
+    nav{position:fixed; top:80px; right:-100%; width:60%; height:100vh; background: rgba(0,0,0,0.85); backdrop-filter:blur(8px); flex-direction:column; padding:40px 20px; gap:25px; transition:0.4s;}
+    nav.active{right:0;}
+    .menu-toggle{display:flex;}
+}
+
+/* HERO */
+.hero{margin-top:130px;text-align:center;padding:80px 20px;}
+.hero h1{font-size:50px;color:#00f7ff;text-shadow:0 0 15px #00f7ff;}
+.hero p{margin-top:20px;font-size:20px;opacity:0.85;}
+.hero .btn{margin-top:30px;display:inline-block;padding:12px 35px;background:#00f7ff;color:#000;font-size:18px;font-weight:700;border-radius:8px;text-decoration:none;transition:0.3s;box-shadow:0 0 15px #00f7ff;}
+.hero .btn:hover{background:#fff; box-shadow:0 0 25px white; transform:scale(1.05);}
+
+/* SECTIONS */
+.section{text-align:center;padding:60px 20px;}
+.section h2{font-size:36px;color:#00f7ff;text-shadow:0 0 12px #00f7ff;}
+.cards{margin-top:40px; display:flex; justify-content:center; flex-wrap:wrap; gap:25px;}
+.card{width:250px; background:rgba(255,255,255,0.05); padding:25px; text-align:center; border-radius:18px; box-shadow:0 0 15px rgba(0,255,255,0.15); transition:0.3s; backdrop-filter: blur(8px);}
+.card:hover{transform:scale(1.05); box-shadow:0 0 25px rgba(0,255,255,0.3);}
+.card h3{margin-bottom:12px; font-size:22px; color:#00f7ff;}
+.card p{font-size:16px; opacity:0.85;}
+.course-btn {
+  display: inline-block;
+  padding: 12px 25px;
+  margin-top: 15px;
+  background: linear-gradient(135deg,#00f7ff, #3700ff);
+  color: #000000;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 5px 15px rgba(31, 83, 224, 0.4);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.course-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: rgba(255,255,255,0.2);
+  transform: skewX(-25deg);
+  transition: 0.5s;
+}
+.course-btn:hover::before { left: 125%; }
+.course-btn:hover { transform: scale(1.05); box-shadow: 0 8px 25px #00f7ff; }
+.course-btn:active { transform: scale(0.97); box-shadow: 0 3px 10px #00f7ff; }
+
+/* FOOTER */
+footer{padding:25px;text-align:center;background:#000;color:#aaa;margin-top:40px; font-size:14px;}
+footer strong{color:#00f7ff;}
+</style>
+</head>
+<body>
+
+<header class="main-header">
+    <div class="logo-box">
+        <img src="logo.png" alt="أكاديمية جعفر" class="logo-img">
+        <span class="logo-text">أكاديمية جعفر للبرمجة</span>
+    </div>
+    <nav>
+        <a href="index.html">الرئيسية</a>
+        <a href="free.html">المحتوى المجاني</a>
+        <a href="paid.html">المحتوى المدفوع</a>
+    </nav>
+    <div class="menu-toggle">
+        <span></span><span></span><span></span>
+    </div>
+</header>
+
+<canvas id="codeRain"></canvas>
+
+<section class="hero">
+    <h1>المحتوى المجاني</h1>
+    <p>ابدأ تعلم البرمجة بدون دفع أي اشتراك، مع شروحات وأمثلة عملية.</p>
+    <a class="btn" href="index.html">العودة للرئيسية</a>
+</section>
+
+<section class="section">
+    <h2>الكورسات المجانية</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>HTML</h3>
+            <p>تعلم أساسيات HTML لإنشاء صفحات ويب.</p>
+            <a href="html_course1.HTML" class="course-btn">دخول كورس HTML</a>
+        </div>
+        <div class="card">
+            <h3>CSS</h3>
+            <p>تعلم تصميم صفحات ويب مع CSS والتأثيرات.</p>
+            <a href="css_course.html" class="course-btn">دخول كورس CSS</a>
+        </div>
+        <div class="card">
+            <h3>JavaScript</h3>
+            <p>تعلم البرمجة التفاعلية على صفحات الويب.</p>
+            <a href="js_course.html" class="course-btn">دخول كورس JavaScript</a>
+        </div>
+        <div class="card">
+            <h3>Python</h3>
+            <p>تعلم البرمجة العامة والتطبيقات العملية.</p>
+            <a href="python_course.html" class="course-btn">دخول كورس Python</a>
+        </div>
+        <div class="card">
+            <h3>C++</h3>
+            <p>تعلم برمجة قوية تستخدم لإنشاء برامج عالية الأداء.</p>
+            <a href="C++_course.html" class="course-btn">دخول كورس C++ </a>
+        </div>
+        <div class="card">
+            <h3>C#</h3>
+            <p>تعلم لغة برمجة حديثة تُستخدم لتطوير برامج سطح المكتب.</p>
+            <a href="Csharp_course.html" class="course-btn">دخول كورس C#</a>
+        </div>
+        <div class="card">
+            <h3>Java</h3>
+            <p>تعلم لغة جافا القوية المستخدمة في تطوير التطبيقات والأنظمة.</p>
+            <a href="java_course.html" class="course-btn">دخول كورس Java</a>
+        </div>
+        <div class="card">
+            <h3>PHP</h3>
+            <p>ادخل عالم تطوير المواقع الديناميكية باستخدام PHP.</p>
+            <a href="php_course.html" class="course-btn">دخول كورس PHP</a>
+        </div>
+        <div class="card">
+            <h3>SQL</h3>
+            <p>تعلم أساسيات قواعد البيانات وكيفية التعامل معها باحتراف.</p>
+            <a href="sql_course.html" class="course-btn">دخول كورس SQL</a>
+        </div>
+
+        <!-- 10 لغات إضافية -->
+        <div class="card">
+            <h3>Ruby</h3>
+            <p>تعلم لغة برمجة سهلة وقوية لتطوير الويب والتطبيقات.</p>
+            <a href="ruby_course.html" class="course-btn">دخول كورس Ruby</a>
+        </div>
+        <div class="card">
+            <h3>Swift</h3>
+            <p>تعلم لغة Swift لتطوير تطبيقات iOS وmacOS.</p>
+            <a href="swift_course.html" class="course-btn">دخول كورس Swift</a>
+        </div>
+        <div class="card">
+            <h3>Kotlin</h3>
+            <p>تعلم لغة Kotlin لتطوير تطبيقات Android حديثة.</p>
+            <a href="kotlin_course.html" class="course-btn">دخول كورس Kotlin</a>
+        </div>
+        <div class="card">
+            <h3>Go</h3>
+            <p>تعلم لغة Go لبناء تطبيقات سريعة وقوية.</p>
+            <a href="go_course.html" class="course-btn">دخول كورس Go</a>
+        </div>
+        <div class="card">
+            <h3>Rust</h3>
+            <p>تعلم لغة Rust الحديثة الآمنة والأداء العالي.</p>
+            <a href="rust_course.html" class="course-btn">دخول كورس Rust</a>
+        </div>
+        <div class="card">
+            <h3>TypeScript</h3>
+            <p>تعلم TypeScript لتطوير تطبيقات JavaScript قوية ومنظمة.</p>
+            <a href="typescript_course.html" class="course-btn">دخول كورس TypeScript</a>
+        </div>
+        <div class="card">
+            <h3>Scala</h3>
+            <p>تعلم Scala للبرمجة الوظيفية وتطبيقات JVM.</p>
+            <a href="scala_course.html" class="course-btn">دخول كورس Scala</a>
+        </div>
+        <div class="card">
+            <h3>Perl</h3>
+            <p>تعلم Perl للبرمجة النصية ومعالجة البيانات.</p>
+            <a href="perl_course.html" class="course-btn">دخول كورس Perl</a>
+        </div>
+        <div class="card">
+            <h3>Dart</h3>
+            <p>تعلم Dart لتطوير تطبيقات Flutter الحديثة.</p>
+            <a href="dart_course.html" class="course-btn">دخول كورس Dart</a>
+        </div>
+        <div class="card">
+            <h3>Lua</h3>
+            <p>تعلم Lua للبرمجة الخفيفة وألعاب الفيديو.</p>
+            <a href="lua_course.html" class="course-btn">دخول كورس Lua</a>
+        </div>
+        <!-- 10 لغات إضافية أخرى -->
+<div class="card">
+    <h3>Haskell</h3>
+    <p>تعلم Haskell للبرمجة الوظيفية والنظريات الرياضية.</p>
+    <a href="haskell_course.html" class="course-btn">دخول كورس Haskell</a>
+</div>
+<div class="card">
+    <h3>Elixir</h3>
+    <p>تعلم Elixir لتطوير تطبيقات متزامنة وموثوقة.</p>
+    <a href="elixir_course.html" class="course-btn">دخول كورس Elixir</a>
+</div>
+<div class="card">
+    <h3>Julia</h3>
+    <p>تعلم Julia للبرمجة العلمية والتحليلات العددية.</p>
+    <a href="julia_course.html" class="course-btn">دخول كورس Julia</a>
+</div>
+<div class="card">
+    <h3>Objective-C</h3>
+    <p>تعلم Objective-C لتطوير تطبيقات iOS القديمة وmacOS.</p>
+    <a href="objectivec_course.html" class="course-btn">دخول كورس Objective-C</a>
+</div>
+<div class="card">
+    <h3>F#</h3>
+    <p>تعلم F# للبرمجة الوظيفية على منصة .NET.</p>
+    <a href="fsharp_course.html" class="course-btn">دخول كورس F#</a>
+</div>
+<div class="card">
+    <h3>R</h3>
+    <p>تعلم R للتحليل الإحصائي وعلوم البيانات.</p>
+    <a href="r_course.html" class="course-btn">دخول كورس R</a>
+</div>
+<div class="card">
+    <h3>Shell</h3>
+    <p>تعلم Shell scripting لأتمتة المهام في أنظمة Linux وUnix.</p>
+    <a href="shell_course.html" class="course-btn">دخول كورس Shell</a>
+</div>
+<div class="card">
+    <h3>MATLAB</h3>
+    <p>تعلم MATLAB للرياضيات والهندسة والمحاكاة.</p>
+    <a href="matlab_course.html" class="course-btn">دخول كورس MATLAB</a>
+</div>
+<div class="card">
+    <h3>COBOL</h3>
+    <p>تعلم COBOL لتطوير أنظمة الشركات القديمة والمالية.</p>
+    <a href="cobol_course.html" class="course-btn">دخول كورس COBOL</a>
+</div>
+<div class="card">
+    <h3>Assembly</h3>
+    <p>تعلم Assembly للبرمجة منخفضة المستوى والتعامل مع الهاردوير مباشرة.</p>
+    <a href="assembly_course.html" class="course-btn">دخول كورس Assembly</a>
+</div>
+<div class="card">
+    <h3>Elm</h3>
+    <p>تعلم Elm لتطوير واجهات ويب آمنة وسهلة باستخدام البرمجة الوظيفية.</p>
+    <a href="elm_course.html" class="course-btn">دخول كورس Elm</a>
+</div>
+<div class="card">
+    <h3>Clojure</h3>
+    <p>تعلم Clojure للبرمجة الوظيفية والتعامل مع البيانات الكبيرة.</p>
+    <a href="clojure_course.html" class="course-btn">دخول كورس Clojure</a>
+</div>
+<div class="card">
+    <h3>Scheme</h3>
+    <p>تعلم Scheme لفهم البرمجة الوظيفية ومفاهيم الخوارزميات.</p>
+    <a href="scheme_course.html" class="course-btn">دخول كورس Scheme</a>
+</div>
+<div class="card">
+    <h3>Prolog</h3>
+    <p>تعلم Prolog للبرمجة المنطقية وحل المشكلات والذكاء الاصطناعي.</p>
+    <a href="prolog_course.html" class="course-btn">دخول كورس Prolog</a>
+</div>
+<div class="card">
+    <h3>Groovy</h3>
+    <p>تعلم Groovy لتسهيل كتابة السكربتات وأتمتة العمليات على منصة Java.</p>
+    <a href="groovy_course.html" class="course-btn">دخول كورس Groovy</a>
+</div>
+<div class="card">
+    <h3>Fortran</h3>
+    <p>تعلم Fortran للحسابات العلمية والهندسية عالية الأداء.</p>
+    <a href="fortran_course.html" class="course-btn">دخول كورس Fortran</a>
+</div>
+<div class="card">
+    <h3>OCaml</h3>
+    <p>تعلم OCaml للبرمجة الوظيفية والتطبيقات الأكاديمية.</p>
+    <a href="ocaml_course.html" class="course-btn">دخول كورس OCaml</a>
+</div>
+<div class="card">
+    <h3>Smalltalk</h3>
+    <p>تعلم Smalltalk لفهم البرمجة الكائنية وتطبيقات OOP.</p>
+    <a href="smalltalk_course.html" class="course-btn">دخول كورس Smalltalk</a>
+</div>
+<div class="card">
+    <h3>VBA</h3>
+    <p>تعلم VBA لأتمتة مهام Excel وOffice بسهولة وسرعة.</p>
+    <a href="vba_course.html" class="course-btn">دخول كورس VBA</a>
+</div>
+<div class="card">
+    <h3>LabVIEW</h3>
+    <p>تعلم LabVIEW لتطوير تطبيقات التحكم والهندسة باستخدام البرمجة الرسومية.</p>
+    <a href="labview_course.html" class="course-btn">دخول كورس LabVIEW</a>
+</div>
+<div class="card">
+    <h3>Solidity</h3>
+    <p>تعلم Solidity لتطوير العقود الذكية على شبكة البلوكشين وEthereum.</p>
+    <a href="solidity_course.html" class="course-btn">دخول كورس Solidity</a>
+</div>
+
+        <section class="section">
+    </div>
+</section>
+<footer>
+جميع الحقوق محفوظة © <strong>أكاديمية جعفر للبرمجة</strong>
+</footer>
+
+<script>
+// MATRIX RAIN
+const canvas = document.getElementById('codeRain');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+const chars = "01<>[]{}#@$&*/+-=";
+const fontSize = 18;
+const columns = canvas.width / fontSize;
+const drops = [];
+for(let i=0;i<columns;i++) drops[i] = Math.floor(Math.random()*canvas.height/fontSize);
+function draw(){
+    ctx.fillStyle = "rgba(0,0,0,0.05)";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle="#00f7ff";
+    ctx.font = fontSize+"px monospace";
+    for(let i=0;i<drops.length;i++){
+        const char = chars[Math.floor(Math.random()*chars.length)];
+        ctx.fillText(char,i*fontSize,drops[i]*fontSize);
+        if(drops[i]*fontSize > canvas.height && Math.random()>0.975) drops[i]=0;
+        drops[i]++;
+    }
+}
+setInterval(draw,35);
+
+// MOBILE MENU
+const toggle = document.querySelector(".menu-toggle");
+const menu = document.querySelector("nav");
+toggle.addEventListener("click",()=>{menu.classList.toggle("active");});
+window.addEventListener("resize", ()=>{canvas.width = window.innerWidth; canvas.height = window.innerHeight;});
+</script>
+
+</body>
+</html>
